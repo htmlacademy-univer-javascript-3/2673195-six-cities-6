@@ -1,5 +1,9 @@
-import {Main} from './Main/main.tsx';
+import {Main} from './Main/Main.tsx';
 
-export function App(){
-  return <Main/>;
+type AppProps = {
+  cityCardsAmount: number;
+}
+
+export function App({ cityCardsAmount } : AppProps) {
+  return <Main cityCardsAmount={cityCardsAmount}/>;
 }
