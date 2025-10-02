@@ -4,3 +4,8 @@ export enum AppRoute {
   Favourites = '/favourites',
   Offer = '/offer/:id',
 }
+
+export enum AuthorizationStatus {
+  Auth,
+  NotAuth
+}
