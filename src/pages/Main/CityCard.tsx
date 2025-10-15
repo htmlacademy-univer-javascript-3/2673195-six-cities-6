@@ -9,13 +9,15 @@ interface CityCardProps {
 }
 
 export function CityCard({offer, onMouseEnter, onMouseLeave}: CityCardProps) {
+  const offerLink = `${AppRoute.Offer.replace(':id', offer.id.toString())}`;
+
   return (
     <article className="cities__card place-card" onMouseEnter={() => onMouseEnter(offer.id)} onMouseLeave={onMouseLeave}>
       <div className="place-card__mark">
         <span>{offer.mark}</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href={`${AppRoute.Offer.replace(':id', offer.id.toString())}`}>
+        <a href={offerLink}>
           <img className="place-card__image" src={offer.photos[0]} width="260" height="200"
             alt="Place image"
           />
@@ -41,7 +43,7 @@ export function CityCard({offer, onMouseEnter, onMouseLeave}: CityCardProps) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.name}</a>
+          <a href={offerLink}>{offer.name}</a>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

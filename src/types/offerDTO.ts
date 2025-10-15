@@ -3,6 +3,7 @@ export type OfferDTO = {
   name: string;
   type: string;
   mark: string;
+  city: string;
   bedroomsCount: number;
   maxAdults: number;
   nightCost: number;
