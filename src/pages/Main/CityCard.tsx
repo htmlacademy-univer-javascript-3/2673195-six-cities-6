@@ -1,9 +1,16 @@
 import {OfferDTO} from '../../types/offerDTO.ts';
 import {AppRoute} from '../../const.ts';
+import {useCallback, useState} from 'react';
 
-export function CityCard({offer}: { offer: OfferDTO }) {
+interface CityCardProps {
+  offer: OfferDTO;
+  onMouseEnter: (offerId: number) => void;
+  onMouseLeave: () => void;
+}
+
+export function CityCard({offer, onMouseEnter, onMouseLeave}: CityCardProps) {
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseEnter={() => onMouseEnter(offer.id)} onMouseLeave={onMouseLeave}>
       <div className="place-card__mark">
         <span>{offer.mark}</span>
       </div>
@@ -43,10 +50,25 @@ export function CityCard({offer}: { offer: OfferDTO }) {
 }
 
 export function CityCardList({offers}: {offers: OfferDTO[]}) {
+  const [activeOffer, setActiveOffer] = useState<number | null>(null);
+
+  const handleMouseEnter = useCallback((offerId: number) => {
+    setActiveOffer(offerId);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setActiveOffer(null);
+  }, []);
+
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
-        <CityCard key={offer.name} offer={offer}/>
+        <CityCard
+          key={offer.id}
+          offer={offer}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        />
       ))}
     </div>);
 }
