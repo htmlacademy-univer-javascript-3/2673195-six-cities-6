@@ -1,24 +1,28 @@
-import {Main} from './Main/Main.tsx';
+import {Main} from './pages/Main/Main.tsx';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from './const.ts';
-import {Login} from './Login/Login.tsx';
-import {Favourites} from './Favourites/Favourites.tsx';
-import {Offer} from './Offer/Offer.tsx';
-import {NotFoundPage} from './NotFoundPage/NotFoundPage.tsx';
-import {PrivateRoute} from './PrivateRoute/PrivateRoute.tsx';
+import {Login} from './pages/Login/Login.tsx';
+import {Favourites} from './pages/Favourites/Favourites.tsx';
+import {Offer} from './pages/Offer/Offer.tsx';
+import {NotFoundPage} from './pages/NotFoundPage/NotFoundPage.tsx';
+import {PrivateRoute} from './components/PrivateRoute.tsx';
+import {OfferDTO, OfferReview} from './types/offerDTO.ts';
+import {User} from './types/user.ts';
 
 type AppProps = {
-  cityCardsAmount: number;
+  offers: OfferDTO[];
+  reviews: OfferReview[];
+  users: User[];
 }
 
 
-export function App({ cityCardsAmount } : AppProps) {
+export function App({offers, reviews, users}: AppProps) {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<Main cityCardsAmount={cityCardsAmount}/>}
+          element={<Main offers={offers}/>}
         />
         <Route
           path={AppRoute.Login}
@@ -34,7 +38,7 @@ export function App({ cityCardsAmount } : AppProps) {
         />
         <Route
           path={AppRoute.Offer}
-          element={<Offer/>}
+          element={<Offer offers={offers} reviews={reviews} users={users}/>}
         />
         <Route
           path="*"

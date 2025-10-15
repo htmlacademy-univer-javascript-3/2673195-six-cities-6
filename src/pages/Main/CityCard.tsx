@@ -1,12 +1,15 @@
-export function CityCard() {
+import {OfferDTO} from '../../types/offerDTO.ts';
+import {AppRoute} from '../../const.ts';
+
+export function CityCard({offer}: { offer: OfferDTO }) {
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
-        <span>Premium</span>
+        <span>{offer.mark}</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src="/img/apartment-01.jpg" width="260" height="200"
+        <a href={`${AppRoute.Offer.replace(':id', offer.id.toString())}`}>
+          <img className="place-card__image" src={offer.photos[0]} width="260" height="200"
             alt="Place image"
           />
         </a>
@@ -14,7 +17,7 @@ export function CityCard() {
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;120</b>
+            <b className="place-card__price-value">&euro;{offer.nightCost}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button" type="button">
@@ -31,10 +34,19 @@ export function CityCard() {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">Beautiful &amp; luxurious apartment at great location</a>
+          <a href="#">{offer.name}</a>
         </h2>
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">{offer.type}</p>
       </div>
     </article>
   );
+}
+
+export function CityCardList({offers}: {offers: OfferDTO[]}) {
+  return (
+    <div className="cities__places-list places__list tabs__content">
+      {offers.map((offer) => (
+        <CityCard key={offer.name} offer={offer}/>
+      ))}
+    </div>);
 }
