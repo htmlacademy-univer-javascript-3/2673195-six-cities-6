@@ -52,7 +52,7 @@ export function CityCard({offer, onMouseEnter, onMouseLeave}: CityCardProps) {
 }
 
 export function CityCardList({offers}: {offers: OfferDTO[]}) {
-  const [activeOffer, setActiveOffer] = useState<number | null>(null);
+  const [, setActiveOffer] = useState<number | null>(null);
 
   const handleMouseEnter = useCallback((offerId: number) => {
     setActiveOffer(offerId);
