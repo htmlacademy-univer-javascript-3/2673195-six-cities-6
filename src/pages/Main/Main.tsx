@@ -1,54 +1,30 @@
 import {CityCardList} from './CityCard.tsx';
+import {Map} from './Map.tsx';
 import {OfferDTO} from '../../types/offerDTO.ts';
 import {Navigation} from '../../components/Navigation.tsx';
+import {Tabs} from './Tabs.tsx';
+import {useState} from 'react';
+import {City} from '../../types/city.ts';
 
 type MainProps = {
   offers: OfferDTO[];
 }
 
 export function Main({offers} : MainProps) {
+  const cities = [...new Set(offers.map((offerDTO: OfferDTO) => offerDTO.city))];
+
+  const [activeCity, setActiveCity] = useState<City>(cities[0]);
+
+  const cityOffers = offers.filter((offer) => offer.city === activeCity);
+  const points = cityOffers.map((offer) => offer.location);
+
   return (
     <div className="page page--gray page--main">
       <Navigation/>
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+        <Tabs cities={cities} activeCity={activeCity} setActiveCity={setActiveCity} />
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -72,7 +48,7 @@ export function Main({offers} : MainProps) {
               <CityCardList offers={offers}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map city={activeCity} points={points}/>
             </div>
           </div>
         </div>

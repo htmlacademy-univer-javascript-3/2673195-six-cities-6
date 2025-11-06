@@ -1,9 +1,12 @@
+import {Point} from './point.ts';
+import {City} from './city.ts';
+
 export type OfferDTO = {
   id: number;
   name: string;
   type: string;
   mark: string;
-  city: string;
+  city: City;
   bedroomsCount: number;
   maxAdults: number;
   nightCost: number;
@@ -13,6 +16,7 @@ export type OfferDTO = {
   rating: number;
   reviewIds: number[];
   photos: string[];
+  location: Point;
 }
 
 export type OfferReview = {

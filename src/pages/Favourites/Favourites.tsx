@@ -1,6 +1,7 @@
 import {Navigation} from '../../components/Navigation.tsx';
 import {OfferDTO} from '../../types/offerDTO.ts';
 import {AppRoute} from '../../const.ts';
+import {City} from '../../types/city.ts';
 
 function FavouriteOffer({offer} : {offer: OfferDTO}) {
   const offerLink = AppRoute.Offer.replace(':id', offer.id.toString());
@@ -39,13 +40,13 @@ function FavouriteOffer({offer} : {offer: OfferDTO}) {
     </article>);
 }
 
-function CityFavourites({city, cityOffers} : {city: string; cityOffers: OfferDTO[]}) {
+function CityFavourites({city, cityOffers} : {city: City; cityOffers: OfferDTO[]}) {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
           <a className="locations__item-link" href="#">
-            <span>{city}</span>
+            <span>{city.title}</span>
           </a>
         </div>
       </div>
@@ -73,7 +74,7 @@ export function Favourites({savedOffers}: { savedOffers: OfferDTO[] }) {
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
               {offersByCity.map((cityWithOffer) => (
-                <CityFavourites key={cityWithOffer.city} city={cityWithOffer.city} cityOffers={cityWithOffer.offers}/>
+                <CityFavourites key={cityWithOffer.city.title} city={cityWithOffer.city} cityOffers={cityWithOffer.offers}/>
               ))}
             </ul>
           </section>
