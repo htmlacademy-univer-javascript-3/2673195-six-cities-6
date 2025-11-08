@@ -49,7 +49,7 @@ export function Main({offers} : MainProps) {
               <OffersList offers={offers} cardType={CardType.City}/>
             </section>
             <div className="cities__right-section">
-              <Map city={activeCity} points={points}/>
+              <Map city={activeCity} points={points} className={'cities__map map'} />
             </div>
           </div>
         </div>

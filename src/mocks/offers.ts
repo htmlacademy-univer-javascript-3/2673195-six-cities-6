@@ -85,3 +85,7 @@ export const offers: OfferDTO[] = [
     }
   },
 ];
+
+export function GetNearPlaces(offer: OfferDTO): OfferDTO[] {
+  return offers.filter((x) => x.city === offer.city).slice(0, 3);
+}

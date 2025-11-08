@@ -2,6 +2,7 @@ import {OfferDTO, OfferReview} from '../../types/offerDTO.ts';
 import {Navigate, useParams} from 'react-router-dom';
 import {User} from '../../types/user.ts';
 import {Navigation} from '../../components/Navigation.tsx';
+import {Map} from '../../components/Map.tsx';
 import {ReviewForm} from './ReviewForm.tsx';
 import {OfferImages} from './OfferImage.tsx';
 import {OfferInside} from './OfferInside.tsx';
@@ -9,6 +10,7 @@ import {HostInfo} from './HostInfo.tsx';
 import {ReviewsList} from './Review.tsx';
 import {OfferDescription} from './OfferDescription.tsx';
 import {NearPlaces} from './NearPlaces.tsx';
+import {GetNearPlaces} from '../../mocks/offers.ts';
 
 interface OfferProps {
   offers: OfferDTO[];
@@ -26,7 +28,7 @@ export function Offer({offers, reviews, users}: OfferProps) {
   }
 
   const offerReviews = reviews.filter((x) => offer.reviewIds.includes(x.id));
-
+  const nearPlaces = GetNearPlaces(offer);
   const host = users.find((x) => x.id === offer.hostId)!;
 
   return (
@@ -90,9 +92,11 @@ export function Offer({offers, reviews, users}: OfferProps) {
               </section>
             </div>
           </div>
-          <section className="offer__map map"/>
+          <div className="offer__map map">
+            <Map city={offer.city} points={nearPlaces.map((x) => x.location)} className={'offer__map map'}/>
+          </div>
         </section>
-        <NearPlaces offers={offers}/>
+        <NearPlaces offers={nearPlaces}/>
       </main>
     </div>
   );

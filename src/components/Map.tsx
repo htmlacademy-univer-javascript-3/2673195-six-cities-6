@@ -9,6 +9,7 @@ import {URL_MARKER_DEFAULT} from '../const.ts';
 type MapProps = {
   city: City;
   points: Point[];
+  className: string;
   // selectedPoint: Point | undefined;
 };
 
@@ -24,8 +25,7 @@ const defaultCustomIcon = new Icon({
 //   iconAnchor: [20, 40]
 // });
 
-export function Map(props: MapProps) {
-  const {city, points} = props;
+export function Map({city, points, className}: MapProps) {
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -50,5 +50,5 @@ export function Map(props: MapProps) {
     }
   }, [map, points]);
 
-  return <div className="cities__map" ref={mapRef}></div>;
+  return <div className={className} ref={mapRef}></div>;
 }
