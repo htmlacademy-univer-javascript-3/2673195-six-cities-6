@@ -8,7 +8,7 @@ import {OfferInside} from './OfferInside.tsx';
 import {HostInfo} from './HostInfo.tsx';
 import {ReviewsList} from './Review.tsx';
 import {OfferDescription} from './OfferDescription.tsx';
-import {NearPlaces} from './NearPlace.tsx';
+import {NearPlaces} from './NearPlaces.tsx';
 
 interface OfferProps {
   offers: OfferDTO[];
