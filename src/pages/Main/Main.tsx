@@ -1,10 +1,11 @@
-import {CityCardList} from './CityCard.tsx';
-import {Map} from './Map.tsx';
+import {Map} from '../../components/Map.tsx';
 import {OfferDTO} from '../../types/offerDTO.ts';
 import {Navigation} from '../../components/Navigation.tsx';
 import {Tabs} from './Tabs.tsx';
 import {useState} from 'react';
 import {City} from '../../types/city.ts';
+import {OffersList} from '../../components/OffersList.tsx';
+import {CardType} from '../../types/cardType.ts';
 
 type MainProps = {
   offers: OfferDTO[];
@@ -45,10 +46,10 @@ export function Main({offers} : MainProps) {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CityCardList offers={offers}/>
+              <OffersList offers={offers} cardType={CardType.City}/>
             </section>
             <div className="cities__right-section">
-              <Map city={activeCity} points={points}/>
+              <Map city={activeCity} points={points} className={'cities__map map'} />
             </div>
           </div>
         </div>

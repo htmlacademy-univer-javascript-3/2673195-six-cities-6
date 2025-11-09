@@ -1,0 +1,14 @@
+import {OfferDTO} from '../../types/offerDTO.ts';
+import {OffersList} from '../../components/OffersList.tsx';
+import {CardType} from '../../types/cardType.ts';
+
+export function NearPlaces({offers}: { offers: OfferDTO[] }) {
+  return (
+    <div className="container">
+      <section className="near-places places">
+        <h2 className="near-places__title">Other places in the neighbourhood</h2>
+        <OffersList offers={offers.slice(0, 3)} cardType={CardType.NearPlace}/>
+      </section>
+    </div>
+  );
+}
