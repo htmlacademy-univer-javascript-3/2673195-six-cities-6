@@ -7,10 +7,10 @@ import {ReviewForm} from './ReviewForm.tsx';
 import {OfferImages} from './OfferImage.tsx';
 import {OfferInside} from './OfferInside.tsx';
 import {HostInfo} from './HostInfo.tsx';
-import {ReviewsList} from './Review.tsx';
 import {OfferDescription} from './OfferDescription.tsx';
 import {NearPlaces} from './NearPlaces.tsx';
 import {GetNearPlaces} from '../../mocks/offers.ts';
+import {ReviewsList} from './ReviewsList.tsx';
 
 interface OfferProps {
   offers: OfferDTO[];

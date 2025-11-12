@@ -1,5 +1,5 @@
-import {OfferDTO} from '../types/offerDTO.ts';
 import {useCallback, useState} from 'react';
+import {OfferDTO} from '../types/offerDTO.ts';
 import {OfferCard} from './OfferCard.tsx';
 import {CardType} from '../types/cardType.ts';
 
