@@ -1,5 +1,5 @@
 import {OfferDTO} from '../types/offerDTO.ts';
-import {amsterdam} from './cities.ts';
+import {amsterdam, paris} from './cities.ts';
 
 export const offers: OfferDTO[] = [
   {
@@ -82,6 +82,26 @@ export const offers: OfferDTO[] = [
     location: {
       lat: 52.3809553943508,
       lng: 4.939309666406198
+    }
+  },
+  {
+    id: 4,
+    name: 'Nice, cozy, warm big bed apartment',
+    type: 'Apartment',
+    mark: 'Premium',
+    city: paris,
+    bedroomsCount: 1,
+    maxAdults: 1,
+    nightCost: 180,
+    inside: ['Wi-Fi'],
+    hostId: 0,
+    description: ['A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.'],
+    rating: 5,
+    reviewIds: [0],
+    photos: ['/img/apartment-03.jpg', '/img/apartment-01.jpg', '/img/apartment-02.jpg'],
+    location: {
+      lat: 48.864716,
+      lng: 2.349014
     }
   },
 ];
