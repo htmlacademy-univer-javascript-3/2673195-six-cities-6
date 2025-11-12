@@ -1,20 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {App} from './App.tsx';
-import {offers} from './mocks/offers.ts';
+import {Provider} from 'react-redux';
+import {store} from './store';
 import {users} from './mocks/users.ts';
-import {reviews} from './mocks/reviews.ts';
+import {loadOffers, loadReviews} from './store/action.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+store.dispatch(loadOffers());
+store.dispatch(loadReviews());
+
 root.render(
   <React.StrictMode>
-    <App
-      offers={offers}
-      reviews={reviews}
-      users={users}
-    />
+    <Provider store={store}>
+      <App users={users}/>
+    </Provider>
   </React.StrictMode>
 );

@@ -1,4 +1,3 @@
-import {OfferDTO, OfferReview} from '../../types/offerDTO.ts';
 import {Navigate, useParams} from 'react-router-dom';
 import {User} from '../../types/user.ts';
 import {Navigation} from '../../components/Navigation.tsx';
@@ -11,14 +10,16 @@ import {OfferDescription} from './OfferDescription.tsx';
 import {NearPlaces} from './NearPlaces.tsx';
 import {GetNearPlaces} from '../../mocks/offers.ts';
 import {ReviewsList} from './ReviewsList.tsx';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
 
 interface OfferProps {
-  offers: OfferDTO[];
-  reviews: OfferReview[];
   users: User[];
 }
 
-export function Offer({offers, reviews, users}: OfferProps) {
+export function Offer({users}: OfferProps) {
+  const offers = useAppSelector((state) => state.offers);
+  const reviews = useAppSelector((state) => state.reviews);
+
   const {id} = useParams();
   const idNumber = Number(id);
   const offer = offers.find((x) => x.id === idNumber);

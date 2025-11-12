@@ -6,23 +6,19 @@ import {Favourites} from './pages/Favourites/Favourites.tsx';
 import {Offer} from './pages/Offer/Offer.tsx';
 import {NotFoundPage} from './pages/NotFoundPage/NotFoundPage.tsx';
 import {PrivateRoute} from './components/PrivateRoute.tsx';
-import {OfferDTO, OfferReview} from './types/offerDTO.ts';
 import {User} from './types/user.ts';
 
 type AppProps = {
-  offers: OfferDTO[];
-  reviews: OfferReview[];
   users: User[];
 }
 
-
-export function App({offers, reviews, users}: AppProps) {
+export function App({users}: AppProps) {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<Main offers={offers}/>}
+          element={<Main/>}
         />
         <Route
           path={AppRoute.Login}
@@ -32,13 +28,13 @@ export function App({offers, reviews, users}: AppProps) {
           path={AppRoute.Favourites}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <Favourites savedOffers={offers}/>
+              <Favourites/>
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Offer}
-          element={<Offer offers={offers} reviews={reviews} users={users}/>}
+          element={<Offer users={users}/>}
         />
         <Route
           path="*"
