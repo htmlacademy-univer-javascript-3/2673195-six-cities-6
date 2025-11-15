@@ -1,24 +1,24 @@
-import {OfferDTO} from '../types/offerDTO.ts';
 import {useCallback, useState} from 'react';
+import {OfferDTO} from '../types/offerDTO.ts';
 import {OfferCard} from './OfferCard.tsx';
-import {CardType} from '../types/cardType.ts';
+import {OfferCardStyle} from '../const.ts';
 
 interface OffersListProps {
   offers: OfferDTO[];
-  cardType: CardType;
+  cardStyle: OfferCardStyle;
 }
 
-function getClassName(cardType: CardType): string {
+function getClassName(cardType: OfferCardStyle): string {
   switch (cardType) {
-    case CardType.City:
+    case OfferCardStyle.City:
       return 'cities__places-list places__list tabs__content';
-    case CardType.NearPlace:
+    case OfferCardStyle.NearPlace:
       return 'near-places__list places__list';
   }
 }
 
-export function OffersList({offers, cardType}: OffersListProps) {
-  const className = getClassName(cardType);
+export function OffersList({offers, cardStyle}: OffersListProps) {
+  const className = getClassName(cardStyle);
 
   const [, setActiveOffer] = useState<number | null>(null);
 
@@ -35,7 +35,7 @@ export function OffersList({offers, cardType}: OffersListProps) {
       {offers.map((offer) => (
         <OfferCard
           key={offer.id}
-          cardType={cardType}
+          cardType={cardStyle}
           offer={offer}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}

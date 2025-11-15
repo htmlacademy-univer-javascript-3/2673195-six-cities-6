@@ -1,16 +1,16 @@
-import {City} from '../../types/city.ts';
+import {CityName} from '../../types/cityName.ts';
 
 type TabProps = {
-  city: City;
+  city: CityName;
   isActive: boolean;
-  handleClick: (city: City) => void;
+  handleClick: (city: CityName) => void;
 }
 
 export function Tab({city, isActive, handleClick}: TabProps) {
   return (
     <li className="locations__item" onClick={() => handleClick(city)}>
       <a className={`locations__item-link tabs__item "${isActive ? 'tabs__item--active' : ''}`} href="#">
-        <span>{city.title}</span>
+        <span>{city}</span>
       </a>
     </li>);
 }

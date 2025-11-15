@@ -31,14 +31,3 @@ export function Review({review, user}: { review: OfferReview; user: User }) {
     </li>);
 }
 
-export function ReviewsList({reviews, users}: { reviews: OfferReview[]; users: User[] }) {
-  return (
-    <ul className="reviews__list">
-      {reviews.map((review) => {
-        const user = users.find((x) => x.id === review.authorId)!;
-        return (
-          <Review key={review.id} review={review} user={user}/>
-        );
-      })}
-    </ul>);
-}

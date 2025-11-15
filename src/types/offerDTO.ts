@@ -1,12 +1,12 @@
 import {Point} from './point.ts';
-import {City} from './city.ts';
+import {CityDTO} from './cityDTO.ts';
 
 export type OfferDTO = {
   id: number;
   name: string;
   type: string;
   mark: string;
-  city: City;
+  city: CityDTO;
   bedroomsCount: number;
   maxAdults: number;
   nightCost: number;

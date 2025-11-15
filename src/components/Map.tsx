@@ -2,12 +2,12 @@ import {useRef, useEffect} from 'react';
 import {Icon, Marker, layerGroup} from 'leaflet';
 import {useMap} from '../hooks/use-map.ts';
 import 'leaflet/dist/leaflet.css';
-import { City } from '../types/city.ts';
+import { CityDTO } from '../types/cityDTO.ts';
 import {Point} from '../types/point.ts';
 import {URL_MARKER_DEFAULT} from '../const.ts';
 
 type MapProps = {
-  city: City;
+  city: CityDTO;
   points: Point[];
   className: string;
   // selectedPoint: Point | undefined;
@@ -48,7 +48,7 @@ export function Map({city, points, className}: MapProps) {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, points]);
+  }, [map, points, city]);
 
   return <div className={className} ref={mapRef}></div>;
 }

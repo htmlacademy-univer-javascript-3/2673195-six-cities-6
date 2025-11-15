@@ -1,7 +1,8 @@
 import {Navigation} from '../../components/Navigation.tsx';
 import {OfferDTO} from '../../types/offerDTO.ts';
 import {AppRoute} from '../../const.ts';
-import {City} from '../../types/city.ts';
+import {CityDTO} from '../../types/cityDTO.ts';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
 
 function FavouriteOffer({offer} : {offer: OfferDTO}) {
   const offerLink = AppRoute.Offer.replace(':id', offer.id.toString());
@@ -40,13 +41,13 @@ function FavouriteOffer({offer} : {offer: OfferDTO}) {
     </article>);
 }
 
-function CityFavourites({city, cityOffers} : {city: City; cityOffers: OfferDTO[]}) {
+function CityFavourites({city, cityOffers} : {city: CityDTO; cityOffers: OfferDTO[]}) {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
           <a className="locations__item-link" href="#">
-            <span>{city.title}</span>
+            <span>{city.name}</span>
           </a>
         </div>
       </div>
@@ -56,7 +57,9 @@ function CityFavourites({city, cityOffers} : {city: City; cityOffers: OfferDTO[]
     </li>);
 }
 
-export function Favourites({savedOffers}: { savedOffers: OfferDTO[] }) {
+export function Favourites() {
+  const savedOffers = useAppSelector((state) => state.offers);
+
   const cities = [...new Set(savedOffers.map((offerDTO: OfferDTO) => offerDTO.city))];
 
   const offersByCity = cities.map((city) => ({
@@ -74,7 +77,7 @@ export function Favourites({savedOffers}: { savedOffers: OfferDTO[] }) {
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
               {offersByCity.map((cityWithOffer) => (
-                <CityFavourites key={cityWithOffer.city.title} city={cityWithOffer.city} cityOffers={cityWithOffer.offers}/>
+                <CityFavourites key={cityWithOffer.city.name} city={cityWithOffer.city} cityOffers={cityWithOffer.offers}/>
               ))}
             </ul>
           </section>
