@@ -3,10 +3,10 @@ import {changeCity, loadOffers, loadReviews} from './action.ts';
 import {offers} from '../mocks/offers.ts';
 import {State} from '../types/state.ts';
 import {reviews} from '../mocks/reviews.ts';
-import {City} from '../const.ts';
+import {CITIES} from '../const.ts';
 
 const initialState : State = {
-  city: City.Paris,
+  city: CITIES.Paris,
   offers: [],
   reviews: []
 };

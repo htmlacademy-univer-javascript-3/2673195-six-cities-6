@@ -1,8 +1,8 @@
 import {OfferDTO, OfferReview} from './offerDTO.ts';
-import {City} from '../const.ts';
+import {CityName} from './cityName.ts';
 
 export type State = {
-  city: City;
+  city: CityName;
   offers: OfferDTO[];
   reviews: OfferReview[];
 };

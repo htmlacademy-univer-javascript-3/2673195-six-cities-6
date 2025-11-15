@@ -1,7 +1,7 @@
-import {City} from '../../const.ts';
+import {CityName} from '../../types/cityName.ts';
 
 type HeaderProps = {
-  activeCity: City;
+  activeCity: CityName;
   offersInCityCount: number;
 }
 

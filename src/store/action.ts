@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import {City} from '../const.ts';
+import {CityName} from '../types/cityName.ts';
 
 export const Action = {
   CHANGE_CITY: 'CHANGE_CITY',
@@ -7,7 +7,7 @@ export const Action = {
   LOAD_REVIEWS: 'LOAD_REVIEWS',
 };
 
-export const changeCity = createAction(Action.CHANGE_CITY, (city: City) => ({
+export const changeCity = createAction(Action.CHANGE_CITY, (city: CityName) => ({
   payload: city
 }));
 

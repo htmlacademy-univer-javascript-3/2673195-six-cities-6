@@ -1,9 +1,9 @@
-import {City} from '../../const.ts';
+import {CityName} from '../../types/cityName.ts';
 
 type TabProps = {
-  city: City;
+  city: CityName;
   isActive: boolean;
-  handleClick: (city: City) => void;
+  handleClick: (city: CityName) => void;
 }
 
 export function Tab({city, isActive, handleClick}: TabProps) {

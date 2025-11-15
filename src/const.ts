@@ -1,3 +1,5 @@
+import {CityName} from './types/cityName.ts';
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -10,16 +12,21 @@ export enum AuthorizationStatus {
   NotAuth
 }
 
-export enum City {
-  Paris = 'Paris',
-  Cologne = 'Cologne',
-  Brussels = 'Brussels',
-  Amsterdam = 'Amsterdam',
-  Hamburg = 'Hamburg',
-  Dusseldorf = 'Dusseldorf'
+export const CITIES = Object.freeze({
+  Paris: 'Paris',
+  Cologne: 'Cologne',
+  Brussels: 'Brussels',
+  Amsterdam: 'Amsterdam',
+  Hamburg: 'Hamburg',
+  Dusseldorf: 'Dusseldorf'
+});
+
+export enum OfferCardStyle {
+  City,
+  NearPlace
 }
 
-export const cities = Object.values(City);
+export const CITIES_LIST: ReadonlyArray<CityName> = Object.keys(CITIES) as ReadonlyArray<CityName>;
 
 export const URL_MARKER_DEFAULT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';

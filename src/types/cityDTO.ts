@@ -1,7 +1,7 @@
-import {City} from '../const.ts';
+import {CityName} from './cityName.ts';
 
 export type CityDTO = {
-  name: City;
+  name: CityName;
   lat: number;
   lng: number;
   zoom: number;

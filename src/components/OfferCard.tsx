@@ -1,11 +1,10 @@
 import {OfferDTO} from '../types/offerDTO.ts';
-import {AppRoute} from '../const.ts';
-import {CardType, getStylePrefix} from '../types/cardType.ts';
-
+import {AppRoute, OfferCardStyle} from '../const.ts';
+import {getStylePrefix} from '../utils/offerCardUtils.ts';
 
 interface OfferCardProps {
   offer: OfferDTO;
-  cardType: CardType;
+  cardType: OfferCardStyle;
   onMouseEnter: (offerId: number) => void;
   onMouseLeave: () => void;
 }
@@ -17,7 +16,7 @@ export function OfferCard({offer, cardType, onMouseEnter, onMouseLeave}: OfferCa
   return (
     <article className={`${stylePrefix}__card place-card`} onMouseEnter={() => onMouseEnter(offer.id)} onMouseLeave={onMouseLeave}>
       {
-        cardType === CardType.City &&
+        cardType === OfferCardStyle.City &&
           <div className="place-card__mark">
             <span>{offer.mark}</span>
           </div>
