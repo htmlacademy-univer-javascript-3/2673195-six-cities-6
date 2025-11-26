@@ -18,8 +18,8 @@ export const APIRoute = {
   Offer: (id: string) => `/offers/${id}`,
   OffersNearby: (id: string) => `/offers/${id}/nearby`,
   Comments: (offerId: string) => `/comments/${offerId}/`,
-  Favourite: '/favourite',
-  ChangeFavouriteStatus: (offerId: string, status: number) => `/changeFavouriteStatus/${offerId}/${status}`,
+  Favourite: '/favorite',
+  ChangeFavouriteStatus: (offerId: string, status: number) => `/favorite/${offerId}/${status}`,
 };
 
 export enum NameSpace {

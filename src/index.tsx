@@ -11,8 +11,9 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-saveToken('123');
+saveToken('123123');
 store.dispatch(fetchOffersAction());
+// store.dispatch(fetchFavouriteAction());
 
 root.render(
   <React.StrictMode>
