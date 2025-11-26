@@ -1,7 +1,8 @@
-import {OfferReview} from '../../types/offerDTO.ts';
-import {User} from '../../types/user.ts';
+import {UserDto} from '../../types/responses/userDto.ts';
 
-export function Review({review, user}: { review: OfferReview; user: User }) {
+import {CommentDto} from '../../types/responses/comments/commentDto.ts';
+
+export function Review({review, user}: { review: CommentDto; user: UserDto }) {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -22,7 +23,7 @@ export function Review({review, user}: { review: OfferReview; user: User }) {
           </div>
         </div>
         <p className="reviews__text">
-          {review.text}
+          {review.comment}
         </p>
         <time className="reviews__time" dateTime={review.date.toISOString().slice(0, 10)}>
           {review.date.toLocaleDateString('en-US', {year: 'numeric', month: 'long'})}

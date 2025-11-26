@@ -2,13 +2,13 @@ import {useRef, useEffect} from 'react';
 import {Icon, Marker, layerGroup} from 'leaflet';
 import {useMap} from '../hooks/use-map.ts';
 import 'leaflet/dist/leaflet.css';
-import { CityDTO } from '../types/cityDTO.ts';
-import {Point} from '../types/point.ts';
+import { CityDto } from '../types/responses/cityDto.ts';
+import {Location} from '../types/location.ts';
 import {URL_MARKER_DEFAULT} from '../const.ts';
 
 type MapProps = {
-  city: CityDTO;
-  points: Point[];
+  city: CityDto;
+  points: Location[];
   className: string;
   // selectedPoint: Point | undefined;
 };

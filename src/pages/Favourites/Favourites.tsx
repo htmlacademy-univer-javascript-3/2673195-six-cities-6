@@ -1,10 +1,10 @@
 import {Navigation} from '../../components/Navigation.tsx';
-import {OfferDTO} from '../../types/offerDTO.ts';
+import {OffersList} from '../../types/responses/offers/offersList.ts';
 import {AppRoute} from '../../const.ts';
-import {CityDTO} from '../../types/cityDTO.ts';
+import {CityDto} from '../../types/responses/cityDto.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 
-function FavouriteOffer({offer} : {offer: OfferDTO}) {
+function FavouriteOffer({offer} : {offer: OffersList}) {
   const offerLink = AppRoute.Offer.replace(':id', offer.id.toString());
 
   return (
@@ -34,14 +34,14 @@ function FavouriteOffer({offer} : {offer: OfferDTO}) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={offerLink}>{offer.name}</a>
+          <a href={offerLink}>{offer.title}</a>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
     </article>);
 }
 
-function CityFavourites({city, cityOffers} : {city: CityDTO; cityOffers: OfferDTO[]}) {
+function CityFavourites({city, cityOffers} : {city: CityDto; cityOffers: OffersList[]}) {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -60,7 +60,7 @@ function CityFavourites({city, cityOffers} : {city: CityDTO; cityOffers: OfferDT
 export function Favourites() {
   const savedOffers = useAppSelector((state) => state.offers);
 
-  const cities = [...new Set(savedOffers.map((offerDTO: OfferDTO) => offerDTO.city))];
+  const cities = [...new Set(savedOffers.map((offerDTO: OffersList) => offerDTO.city))];
 
   const offersByCity = cities.map((city) => ({
     city: city,

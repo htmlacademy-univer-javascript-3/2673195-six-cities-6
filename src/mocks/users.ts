@@ -1,6 +1,6 @@
-import {User} from '../types/user.ts';
+import {UserDto} from '../types/responses/userDto.ts';
 
-export const users: User[] = [
+export const users: UserDto[] = [
   {
     id: 0,
     name: 'Angelina',

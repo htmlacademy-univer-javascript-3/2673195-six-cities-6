@@ -1,10 +1,10 @@
 import {useCallback, useState} from 'react';
-import {OfferDTO} from '../types/offerDTO.ts';
+import {OffersList} from '../types/responses/offers/offersList.ts';
 import {OfferCard} from './OfferCard.tsx';
 import {OfferCardStyle} from '../const.ts';
 
 interface OffersListProps {
-  offers: OfferDTO[];
+  offers: OffersList[];
   cardStyle: OfferCardStyle;
 }
 

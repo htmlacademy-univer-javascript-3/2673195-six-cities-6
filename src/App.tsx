@@ -6,10 +6,10 @@ import {Favourites} from './pages/Favourites/Favourites.tsx';
 import {Offer} from './pages/Offer/Offer.tsx';
 import {NotFoundPage} from './pages/NotFoundPage/NotFoundPage.tsx';
 import {PrivateRoute} from './components/PrivateRoute.tsx';
-import {User} from './types/user.ts';
+import {UserDto} from './types/responses/userDto.ts';
 
 type AppProps = {
-  users: User[];
+  users: UserDto[];
 }
 
 export function App({users}: AppProps) {

@@ -1,10 +1,10 @@
-import {OfferDTO} from '../types/offerDTO.ts';
+import {OffersList} from '../types/responses/offers/offersList.ts';
 import {amsterdam, paris} from './cities.ts';
 
-export const offers: OfferDTO[] = [
+export const offers: OffersList[] = [
   {
     id: 0,
-    name: 'Beautiful & luxurious studio at great location',
+    title: 'Beautiful & luxurious studio at great location',
     type: 'Apartment',
     mark: 'Premium',
     city: amsterdam,
@@ -26,7 +26,7 @@ export const offers: OfferDTO[] = [
   },
   {
     id: 1,
-    name: 'Wood and stone place',
+    title: 'Wood and stone place',
     type: 'Room',
     mark: 'Premium',
     city: amsterdam,
@@ -46,7 +46,7 @@ export const offers: OfferDTO[] = [
   },
   {
     id: 2,
-    name: 'Canal View Prinsengracht',
+    title: 'Canal View Prinsengracht',
     type: 'Apartment',
     mark: 'Premium',
     city: amsterdam,
@@ -66,7 +66,7 @@ export const offers: OfferDTO[] = [
   },
   {
     id: 3,
-    name: 'Nice, cozy, warm big bed apartment',
+    title: 'Nice, cozy, warm big bed apartment',
     type: 'Apartment',
     mark: 'Premium',
     city: amsterdam,
@@ -86,7 +86,7 @@ export const offers: OfferDTO[] = [
   },
   {
     id: 4,
-    name: 'Nice, cozy, warm big bed apartment',
+    title: 'Nice, cozy, warm big bed apartment',
     type: 'Apartment',
     mark: 'Premium',
     city: paris,
@@ -106,6 +106,6 @@ export const offers: OfferDTO[] = [
   },
 ];
 
-export function GetNearPlaces(offer: OfferDTO): OfferDTO[] {
+export function GetNearPlaces(offer: OffersList): OffersList[] {
   return offers.filter((x) => x.city === offer.city).slice(0, 3);
 }

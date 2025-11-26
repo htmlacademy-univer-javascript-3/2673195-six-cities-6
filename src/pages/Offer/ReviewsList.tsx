@@ -1,8 +1,9 @@
-import {OfferReview} from '../../types/offerDTO.ts';
-import {User} from '../../types/user.ts';
+import {UserDto} from '../../types/responses/userDto.ts';
 import {Review} from './Review.tsx';
 
-export function ReviewsList({reviews, users}: { reviews: OfferReview[]; users: User[] }) {
+import {CommentDto} from '../../types/responses/comments/commentDto.ts';
+
+export function ReviewsList({reviews, users}: { reviews: CommentDto[]; users: UserDto[] }) {
   return (
     <ul className="reviews__list">
       {reviews.map((review) => {

@@ -1,9 +1,9 @@
-import {OfferDTO} from '../types/offerDTO.ts';
+import {OffersList} from '../types/responses/offers/offersList.ts';
 import {AppRoute, OfferCardStyle} from '../const.ts';
 import {getStylePrefix} from '../utils/offerCardUtils.ts';
 
 interface OfferCardProps {
-  offer: OfferDTO;
+  offer: OffersList;
   cardType: OfferCardStyle;
   onMouseEnter: (offerId: number) => void;
   onMouseLeave: () => void;
@@ -48,7 +48,7 @@ export function OfferCard({offer, cardType, onMouseEnter, onMouseLeave}: OfferCa
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={offerLink}>{offer.name}</a>
+          <a href={offerLink}>{offer.title}</a>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

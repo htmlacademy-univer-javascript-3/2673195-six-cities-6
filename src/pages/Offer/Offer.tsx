@@ -1,5 +1,5 @@
 import {Navigate, useParams} from 'react-router-dom';
-import {User} from '../../types/user.ts';
+import {UserDto} from '../../types/responses/userDto.ts';
 import {Navigation} from '../../components/Navigation.tsx';
 import {Map} from '../../components/Map.tsx';
 import {ReviewForm} from './ReviewForm.tsx';
@@ -13,7 +13,7 @@ import {ReviewsList} from './ReviewsList.tsx';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 
 interface OfferProps {
-  users: User[];
+  users: UserDto[];
 }
 
 export function Offer({users}: OfferProps) {

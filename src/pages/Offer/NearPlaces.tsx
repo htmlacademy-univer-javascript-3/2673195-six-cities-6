@@ -1,8 +1,8 @@
-import {OfferDTO} from '../../types/offerDTO.ts';
+import {OffersList} from '../../types/responses/offers/offersList.ts';
 import {OffersList} from '../../components/OffersList.tsx';
 import {OfferCardStyle} from '../../const.ts';
 
-export function NearPlaces({offers}: { offers: OfferDTO[] }) {
+export function NearPlaces({offers}: { offers: OffersList[] }) {
   return (
     <div className="container">
       <section className="near-places places">
