@@ -4,7 +4,7 @@ import {checkAuthAction, loginAction, logoutAction} from '../../apiActions/userA
 import {UserState} from '../../../types/stateSlices/userState.ts';
 
 const initialState: UserState = {
-  authorizationStatus: AuthorizationStatus.Unknown,
+  authorizationStatus: AuthorizationStatus.Auth,
 };
 
 export const userData = createSlice({

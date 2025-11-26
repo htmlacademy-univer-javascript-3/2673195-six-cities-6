@@ -1,7 +1,8 @@
-export function OfferDescription({description}: { description: string[] }) {
+export function OfferDescription({description}: { description: string }) {
+  const paragraphs = description.split('\n\n');
   return (
     <div className="offer__description">
-      {description.map((paragraph) =>
+      {paragraphs.map((paragraph) =>
         (
           <p className="offer__text" key={paragraph}>
             {paragraph}

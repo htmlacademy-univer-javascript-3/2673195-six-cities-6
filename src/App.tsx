@@ -6,13 +6,9 @@ import {Favourites} from './pages/Favourites/Favourites.tsx';
 import {Offer} from './pages/Offer/Offer.tsx';
 import {NotFoundPage} from './pages/NotFoundPage/NotFoundPage.tsx';
 import {PrivateRoute} from './components/PrivateRoute.tsx';
-import {UserDto} from './types/responses/userDto.ts';
 
-type AppProps = {
-  users: UserDto[];
-}
+export function App() {
 
-export function App({users}: AppProps) {
   return (
     <BrowserRouter>
       <Routes>
@@ -34,7 +30,7 @@ export function App({users}: AppProps) {
         />
         <Route
           path={AppRoute.Offer}
-          element={<Offer users={users}/>}
+          element={<Offer/>}
         />
         <Route
           path="*"

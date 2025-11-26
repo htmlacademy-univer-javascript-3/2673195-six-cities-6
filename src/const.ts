@@ -24,7 +24,9 @@ export const APIRoute = {
 
 export enum NameSpace {
   Offers = 'OFFERS',
-  User = 'USER'
+  User = 'USER',
+  Favourites = 'Favourites',
+  City = 'CITY',
 }
 
 export enum AuthorizationStatus {

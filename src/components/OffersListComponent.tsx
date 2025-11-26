@@ -2,9 +2,10 @@ import {useCallback, useState} from 'react';
 import {OffersList} from '../types/responses/offers/offersList.ts';
 import {OfferCard} from './OfferCard.tsx';
 import {OfferCardStyle} from '../const.ts';
+import {OfferCompactDto} from '../types/responses/offers/offerCompactDto.ts';
 
 interface OffersListProps {
-  offers: OffersList[];
+  offers: OffersList | OfferCompactDto[];
   cardStyle: OfferCardStyle;
 }
 
@@ -17,12 +18,12 @@ function getClassName(cardType: OfferCardStyle): string {
   }
 }
 
-export function OffersList({offers, cardStyle}: OffersListProps) {
+export function OffersListComponent({offers, cardStyle}: OffersListProps) {
   const className = getClassName(cardStyle);
 
-  const [, setActiveOffer] = useState<number | null>(null);
+  const [, setActiveOffer] = useState<string | null>(null);
 
-  const handleMouseEnter = useCallback((offerId: number) => {
+  const handleMouseEnter = useCallback((offerId: string) => {
     setActiveOffer(offerId);
   }, []);
 

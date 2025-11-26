@@ -1,23 +1,22 @@
 import {Navigation} from '../../components/Navigation.tsx';
-import {OffersList} from '../../types/responses/offers/offersList.ts';
+import {OffersList, OffersListItem} from '../../types/responses/offers/offersList.ts';
 import {AppRoute} from '../../const.ts';
 import {CityDto} from '../../types/responses/cityDto.ts';
-import {useAppSelector} from '../../hooks/use-app-selector.ts';
 
-function FavouriteOffer({offer} : {offer: OffersList}) {
+function FavouriteOffer({offer} : {offer: OffersListItem}) {
   const offerLink = AppRoute.Offer.replace(':id', offer.id.toString());
 
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <a href={offerLink}>
-          <img className="place-card__image" src={offer.photos[0]} width="150" height="110" alt="Place image"/>
+          <img className="place-card__image" src={offer.previewImage} width="150" height="110" alt="Place image"/>
         </a>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{offer.nightCost}</b>
+            <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
@@ -41,7 +40,7 @@ function FavouriteOffer({offer} : {offer: OffersList}) {
     </article>);
 }
 
-function CityFavourites({city, cityOffers} : {city: CityDto; cityOffers: OffersList[]}) {
+function CityFavourites({city, cityOffers} : {city: CityDto; cityOffers: OffersList}) {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -58,9 +57,9 @@ function CityFavourites({city, cityOffers} : {city: CityDto; cityOffers: OffersL
 }
 
 export function Favourites() {
-  const savedOffers = useAppSelector((state) => state.offers);
+  const savedOffers : OffersList = [];
 
-  const cities = [...new Set(savedOffers.map((offerDTO: OffersList) => offerDTO.city))];
+  const cities = [...new Set(savedOffers.map((offerDTO: OffersListItem) => offerDTO.city))];
 
   const offersByCity = cities.map((city) => ({
     city: city,

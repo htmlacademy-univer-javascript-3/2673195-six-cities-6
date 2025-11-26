@@ -3,7 +3,6 @@ import {NameSpace} from '../../../const.ts';
 import {OffersState} from '../../../types/stateSlices/offersState.ts';
 import {fetchOffersAction} from '../../apiActions/offersActions.ts';
 
-
 const initialState: OffersState = {
   offers: [],
   hasError: false,

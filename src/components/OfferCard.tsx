@@ -1,11 +1,12 @@
-import {OffersList} from '../types/responses/offers/offersList.ts';
+import {OffersListItem} from '../types/responses/offers/offersList.ts';
 import {AppRoute, OfferCardStyle} from '../const.ts';
 import {getStylePrefix} from '../utils/offerCardUtils.ts';
+import {OfferCompactDto} from '../types/responses/offers/offerCompactDto.ts';
 
 interface OfferCardProps {
-  offer: OffersList;
+  offer: OffersListItem | OfferCompactDto;
   cardType: OfferCardStyle;
-  onMouseEnter: (offerId: number) => void;
+  onMouseEnter: (offerId: string) => void;
   onMouseLeave: () => void;
 }
 
@@ -17,13 +18,14 @@ export function OfferCard({offer, cardType, onMouseEnter, onMouseLeave}: OfferCa
     <article className={`${stylePrefix}__card place-card`} onMouseEnter={() => onMouseEnter(offer.id)} onMouseLeave={onMouseLeave}>
       {
         cardType === OfferCardStyle.City &&
-          <div className="place-card__mark">
-            <span>{offer.mark}</span>
-          </div>
+        offer.isPremium &&
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
       }
       <div className={`${stylePrefix}__image-wrapper place-card__image-wrapper`}>
         <a href={offerLink}>
-          <img className="place-card__image" src={offer.photos[0]} width="260" height="200"
+          <img className="place-card__image" src={offer.previewImage} width="260" height="200"
             alt="Place image"
           />
         </a>
@@ -31,7 +33,7 @@ export function OfferCard({offer, cardType, onMouseEnter, onMouseLeave}: OfferCa
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{offer.nightCost}</b>
+            <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button" type="button">

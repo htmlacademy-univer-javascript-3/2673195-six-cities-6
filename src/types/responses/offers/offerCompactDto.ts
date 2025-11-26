@@ -1,4 +1,5 @@
 import {CityDto} from '../cityDto.ts';
+import {Location} from '../../location.ts';
 
 export type OfferCompactDto = {
   id: string;

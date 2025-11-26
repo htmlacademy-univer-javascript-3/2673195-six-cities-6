@@ -1,22 +1,17 @@
-import {Location} from '../../location.ts';
 import {CityDto} from '../cityDto.ts';
+import {Location} from '../../location.ts';
 
 export type OffersList = OffersListItem[];
 
 export type OffersListItem = {
-  id: number;
+  id: string;
   title: string;
   type: string;
-  isPremium: boolean;
+  price: number;
   city: CityDto;
   location: Location;
-  bedroomsCount: number;
-  maxAdults: number;
-  nightCost: number;
-  inside: string[];
-  hostId: number;
-  description: string[];
+  isFavourite: boolean;
+  isPremium: boolean;
   rating: number;
-  reviewIds: number[];
-  photos: string[];
+  previewImage: string;
 }
