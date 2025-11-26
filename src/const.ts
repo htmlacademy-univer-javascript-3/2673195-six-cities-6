@@ -22,7 +22,13 @@ export const APIRoute = {
   ChangeFavouriteStatus: (offerId: string, status: number) => `/changeFavouriteStatus/${offerId}/${status}`,
 };
 
+export enum NameSpace {
+  Offers = 'OFFERS',
+  User = 'USER'
+}
+
 export enum AuthorizationStatus {
+  Unknown,
   Auth,
   NotAuth
 }

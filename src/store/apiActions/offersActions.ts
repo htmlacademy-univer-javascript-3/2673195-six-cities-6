@@ -6,7 +6,7 @@ import {APIRoute} from '../../const.ts';
 import {OfferDto} from '../../types/responses/offers/offerDto.ts';
 import {OffersNearbyDto} from '../../types/responses/offers/offersNearbyDto.ts';
 
-export const fetchCommentsAction = createAsyncThunk<OffersList, undefined, {
+export const fetchOffersAction = createAsyncThunk<OffersList, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;

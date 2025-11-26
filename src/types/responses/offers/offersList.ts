@@ -1,7 +1,7 @@
 import {Location} from '../../location.ts';
 import {CityDto} from '../cityDto.ts';
 
-export type OffersList = OffersList[];
+export type OffersList = OffersListItem[];
 
 export type OffersListItem = {
   id: number;
