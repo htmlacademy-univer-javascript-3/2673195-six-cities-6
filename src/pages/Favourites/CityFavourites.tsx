@@ -4,7 +4,8 @@ import {getFavouritesInCity} from '../../store/slices/favourites/favouritesSelec
 import {CityName} from '../../types/cityName.ts';
 
 export function CityFavourites({cityName}: { cityName: CityName }) {
-  const favourites = useAppSelector(getFavouritesInCity);
+  const favourites = useAppSelector((state) =>
+    getFavouritesInCity(state, cityName));
 
   return (
     <li className="favorites__locations-items">

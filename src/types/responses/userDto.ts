@@ -1,7 +1,7 @@
 export type UserDto = {
-  id: number;
   name: string;
-  status: string;
   avatarUrl?: string;
+  isPro: boolean;
+  email: string;
   token: string;
 }

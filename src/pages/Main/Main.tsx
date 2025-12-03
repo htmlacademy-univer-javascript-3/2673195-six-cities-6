@@ -1,5 +1,5 @@
 import {Map} from '../../components/Map.tsx';
-import {Navigation} from '../../components/Navigation.tsx';
+import {Navigation} from '../../components/navigation/Navigation.tsx';
 import {Tabs} from './Tabs.tsx';
 import {OffersListComponent} from '../../components/OffersListComponent.tsx';
 import {useAppSelector} from '../../hooks/useAppSelector.ts';
