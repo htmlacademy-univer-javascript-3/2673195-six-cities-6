@@ -2,21 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {App} from './App.tsx';
 import {Provider} from 'react-redux';
-import {store} from './store';
-import {users} from './mocks/users.ts';
-import {loadOffers, loadReviews} from './store/action.ts';
+import {store} from './store/store.ts';
+import {fetchOffersAction} from './store/apiActions/offersActions.ts';
+import {ToastContainer} from 'react-toastify';
+import {saveToken} from './services/token.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-store.dispatch(loadOffers());
-store.dispatch(loadReviews());
+saveToken('123123');
+store.dispatch(fetchOffersAction());
+// store.dispatch(fetchFavouriteAction());
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App users={users}/>
+      <ToastContainer/>
+      <App/>
     </Provider>
   </React.StrictMode>
 );

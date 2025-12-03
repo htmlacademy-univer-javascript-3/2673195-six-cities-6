@@ -1,17 +1,16 @@
-import {OfferReview} from '../../types/offerDTO.ts';
-import {User} from '../../types/user.ts';
+import {CommentDto} from '../../types/responses/comments/commentDto.ts';
 
-export function Review({review, user}: { review: OfferReview; user: User }) {
+export function Review({review}: { review: CommentDto }) {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={user.avatarUrl} width="54" height="54"
+          <img className="reviews__avatar user__avatar" src={review.user.avatarUrl} width="54" height="54"
             alt="Reviews avatar"
           />
         </div>
         <span className="reviews__user-name">
-          {user.name}
+          {review.user.name}
         </span>
       </div>
       <div className="reviews__info">
@@ -22,7 +21,7 @@ export function Review({review, user}: { review: OfferReview; user: User }) {
           </div>
         </div>
         <p className="reviews__text">
-          {review.text}
+          {review.comment}
         </p>
         <time className="reviews__time" dateTime={review.date.toISOString().slice(0, 10)}>
           {review.date.toLocaleDateString('en-US', {year: 'numeric', month: 'long'})}
@@ -30,4 +29,3 @@ export function Review({review, user}: { review: OfferReview; user: User }) {
       </div>
     </li>);
 }
-

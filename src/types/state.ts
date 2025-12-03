@@ -1,9 +1,5 @@
-import {OfferDTO, OfferReview} from './offerDTO.ts';
-import {CityName} from './cityName.ts';
+import {store} from '../store/store.ts';
 
-export type State = {
-  city: CityName;
-  offers: OfferDTO[];
-  reviews: OfferReview[];
-};
+export type State = ReturnType<typeof store.getState>;
 
+export type AppDispatch = typeof store.dispatch;

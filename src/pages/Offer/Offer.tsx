@@ -1,5 +1,4 @@
-import {Navigate, useParams} from 'react-router-dom';
-import {User} from '../../types/user.ts';
+import {useParams} from 'react-router-dom';
 import {Navigation} from '../../components/Navigation.tsx';
 import {Map} from '../../components/Map.tsx';
 import {ReviewForm} from './ReviewForm.tsx';
@@ -8,36 +7,61 @@ import {OfferInside} from './OfferInside.tsx';
 import {HostInfo} from './HostInfo.tsx';
 import {OfferDescription} from './OfferDescription.tsx';
 import {NearPlaces} from './NearPlaces.tsx';
-import {GetNearPlaces} from '../../mocks/offers.ts';
 import {ReviewsList} from './ReviewsList.tsx';
-import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {fetchOfferAction} from '../../store/apiActions/offersActions.ts';
+import {useAppDispatch} from '../../hooks/useAppDispatch.ts';
+import {useEffect, useState} from 'react';
+import {OfferDto} from '../../types/responses/offers/offerDto.ts';
+import {AxiosError} from 'axios';
+import {CommentsListDto} from '../../types/responses/comments/commentsListDto.ts';
+import {OffersNearbyDto} from '../../types/responses/offers/offersNearbyDto.ts';
 
-interface OfferProps {
-  users: User[];
-}
-
-export function Offer({users}: OfferProps) {
-  const offers = useAppSelector((state) => state.offers);
-  const reviews = useAppSelector((state) => state.reviews);
-
+export function Offer() {
   const {id} = useParams();
-  const idNumber = Number(id);
-  const offer = offers.find((x) => x.id === idNumber);
+  const dispatch = useAppDispatch();
 
-  if (!offer) {
-    return <Navigate to="/*"/>;
+  const [offer, setOffer] = useState<OfferDto | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (id) {
+      setLoading(true);
+      dispatch(fetchOfferAction(id))
+        .unwrap()
+        .then((offerData) => {
+          setOffer(offerData);
+          setError(null);
+        })
+        .catch((err: AxiosError) => {
+          setError(err.message || 'Failed to load offer');
+          setOffer(null);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  }, [dispatch, id]);
+
+  const offerReviews: CommentsListDto = [];
+
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
-  const offerReviews = reviews.filter((x) => offer.reviewIds.includes(x.id));
-  const nearPlaces = GetNearPlaces(offer);
-  const host = users.find((x) => x.id === offer.hostId)!;
+  if (error || !offer) {
+    return <div>Error: {error}</div>;
+  }
+
+  const nearPlaces : OffersNearbyDto = [];
+  const host = offer.host;
 
   return (
     <div className="page">
       <Navigation/>
       <main className="page__main page__main--offer">
         <section className="offer">
-          <OfferImages imageUrls={offer.photos}/>
+          <OfferImages imageUrls={offer.images}/>
           <div className="offer__container container">
             <div className="offer__wrapper">
               <div className="offer__mark">
@@ -45,7 +69,7 @@ export function Offer({users}: OfferProps) {
               </div>
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  {offer.name}
+                  {offer.title}
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
@@ -66,18 +90,18 @@ export function Offer({users}: OfferProps) {
                   {offer.type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {offer.bedroomsCount} {offer.bedroomsCount > 1 ? 'Bedrooms' : 'Bedroom'}
+                  {offer.bedrooms} {offer.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
                 </li>
                 <li className="offer__feature offer__feature--adults">
                   Max {offer.maxAdults} {offer.maxAdults > 1 ? 'adults' : 'adult'}
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;{offer.nightCost}</b>
+                <b className="offer__price-value">&euro;{offer.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
 
-              <OfferInside inside={offer.inside}/>
+              <OfferInside inside={offer.goods}/>
 
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
@@ -86,9 +110,9 @@ export function Offer({users}: OfferProps) {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
+                  Reviews &middot; <span className="reviews__amount">{offerReviews.length}</span>
                 </h2>
-                <ReviewsList reviews={offerReviews} users={users}/>
+                <ReviewsList reviews={offerReviews}/>
                 <ReviewForm/>
               </section>
             </div>

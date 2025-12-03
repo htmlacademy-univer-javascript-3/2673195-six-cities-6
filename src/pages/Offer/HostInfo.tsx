@@ -1,6 +1,6 @@
-import {User} from '../../types/user.ts';
+import {UserCompactDto} from '../../types/responses/userCompactDto.ts';
 
-export function HostInfo({host}: { host: User }) {
+export function HostInfo({host}: { host: UserCompactDto }) {
   return (
     <div className="offer__host-user user">
       <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
@@ -12,7 +12,7 @@ export function HostInfo({host}: { host: User }) {
         {host.name}
       </span>
       <span className="offer__user-status">
-        {host.status}
+        {host.isPro ? 'Pro' : ''}
       </span>
     </div>);
 }

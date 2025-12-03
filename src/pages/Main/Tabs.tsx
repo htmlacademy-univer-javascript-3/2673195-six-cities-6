@@ -1,13 +1,20 @@
 import {Tab} from './Tab.tsx';
 import {CITIES_LIST} from '../../const.ts';
 import {CityName} from '../../types/cityName.ts';
+import {useAppDispatch} from '../../hooks/useAppDispatch.ts';
+import {setCity} from '../../store/slices/city/citySlice.ts';
 
 type TabsProps = {
   activeCity: CityName;
-  setActiveCity: (activeCity: CityName) => void;
 }
 
-export function Tabs({activeCity, setActiveCity}: TabsProps) {
+export function Tabs({activeCity}: TabsProps) {
+  const dispatch = useAppDispatch();
+
+  const handleCityClick = (city: CityName) => {
+    dispatch(setCity(city));
+  };
+
   return (
     <div className="tabs">
       <section className="locations container">
@@ -17,7 +24,7 @@ export function Tabs({activeCity, setActiveCity}: TabsProps) {
               city={city}
               key={city}
               isActive={activeCity === city}
-              handleClick={setActiveCity}
+              handleClick={handleCityClick}
             />)
           )}
         </ul>
