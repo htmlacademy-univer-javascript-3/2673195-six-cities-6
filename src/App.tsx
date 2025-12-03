@@ -1,13 +1,17 @@
 import {Main} from './pages/Main/Main.tsx';
 import {Route, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from './const.ts';
+import {AppRoute} from './const.ts';
 import {Login} from './pages/Login/Login.tsx';
 import {Favourites} from './pages/Favourites/Favourites.tsx';
 import {Offer} from './pages/Offer/Offer.tsx';
 import {NotFoundPage} from './pages/NotFoundPage/NotFoundPage.tsx';
 import {PrivateRoute} from './components/PrivateRoute.tsx';
+import {useAppSelector} from './hooks/useAppSelector.ts';
+import {getAuthorizationStatus} from './store/slices/user/userSelectors.ts';
 
 export function App() {
+  const authStatus = useAppSelector(getAuthorizationStatus);
+
   return (
     <Routes>
       <Route
@@ -21,7 +25,7 @@ export function App() {
       <Route
         path={AppRoute.Favourites}
         element={
-          <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+          <PrivateRoute authorizationStatus={authStatus}>
             <Favourites/>
           </PrivateRoute>
         }

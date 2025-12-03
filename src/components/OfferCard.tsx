@@ -2,6 +2,8 @@ import {OffersListItem} from '../types/responses/offers/offersList.ts';
 import {AppRoute, OfferCardStyle} from '../const.ts';
 import {getStylePrefix} from '../utils/offerCardUtils.ts';
 import {OfferCompactDto} from '../types/responses/offers/offerCompactDto.ts';
+import {Link} from 'react-router-dom';
+import {memo} from 'react';
 
 interface OfferCardProps {
   offer: OffersListItem | OfferCompactDto;
@@ -10,7 +12,7 @@ interface OfferCardProps {
   onMouseLeave: () => void;
 }
 
-export function OfferCard({offer, cardType, onMouseEnter, onMouseLeave}: OfferCardProps) {
+export const OfferCard = memo(({offer, cardType, onMouseEnter, onMouseLeave}: OfferCardProps) => {
   const offerLink = AppRoute.Offer(offer.id);
   const stylePrefix = getStylePrefix(cardType);
 
@@ -24,11 +26,11 @@ export function OfferCard({offer, cardType, onMouseEnter, onMouseLeave}: OfferCa
         </div>
       }
       <div className={`${stylePrefix}__image-wrapper place-card__image-wrapper`}>
-        <a href={offerLink}>
+        <Link to={offerLink}>
           <img className="place-card__image" src={offer.previewImage} width="260" height="200"
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -50,11 +52,10 @@ export function OfferCard({offer, cardType, onMouseEnter, onMouseLeave}: OfferCa
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={offerLink}>{offer.title}</a>
+          <Link to={offerLink}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
     </article>
   );
-}
-
+});

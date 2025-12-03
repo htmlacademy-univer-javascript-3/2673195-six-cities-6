@@ -3,6 +3,7 @@ import {useAppSelector} from '../../hooks/useAppSelector.ts';
 import {getAuthorizationStatus} from '../../store/slices/user/userSelectors.ts';
 import {NavigationProfile} from './NavigationProfile.tsx';
 import {NavigationLogIn} from './NavigationLogIn.tsx';
+import {Link} from 'react-router-dom';
 
 export function Navigation() {
   const authStatus = useAppSelector(getAuthorizationStatus);
@@ -12,9 +13,9 @@ export function Navigation() {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <a className="header__logo-link" href={AppRoute.Main}>
+            <Link className="header__logo-link" to={AppRoute.Main}>
               <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-            </a>
+            </Link>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
