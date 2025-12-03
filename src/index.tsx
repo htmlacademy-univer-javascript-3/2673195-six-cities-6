@@ -5,21 +5,25 @@ import {Provider} from 'react-redux';
 import {store} from './store/store.ts';
 import {fetchOffersAction} from './store/apiActions/offersActions.ts';
 import {ToastContainer} from 'react-toastify';
-import {saveToken} from './services/token.ts';
+import {checkAuthAction} from './store/apiActions/userActions.ts';
+import {HistoryRouter} from './components/HistoryRouter.tsx';
+import browserHistory from './browser-history.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-saveToken('123123');
+store.dispatch(checkAuthAction());
 store.dispatch(fetchOffersAction());
 // store.dispatch(fetchFavouriteAction());
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ToastContainer/>
-      <App/>
+      <HistoryRouter history={browserHistory}>
+        <ToastContainer/>
+        <App/>
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>
 );

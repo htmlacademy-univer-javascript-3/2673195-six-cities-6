@@ -2,15 +2,13 @@ import {State} from '../../../types/state.ts';
 import {NameSpace} from '../../../const.ts';
 import {OffersList} from '../../../types/responses/offers/offersList.ts';
 import {createSelector} from '@reduxjs/toolkit';
-import {getCityName} from '../city/citySelectors.ts';
 
-const getFavourites = (state: Pick<State, NameSpace.Favourites>): OffersList =>
+export const getFavourites = (state: Pick<State, NameSpace.Favourites>): OffersList =>
   state[NameSpace.Favourites].favourites;
 
 export const getFavouritesInCity = createSelector(
-  [getFavourites, getCityName],
-  (favourites, cityName) =>
-    favourites.filter((x) => x.city.name === cityName)
+  [getFavourites, (_state: Pick<State, NameSpace.Favourites>, city: string) => city],
+  (favourites, city) => favourites.filter((x) => x.city.name === city)
 );
 
 export const getFavouritesLoadingStatus = (state: Pick<State, NameSpace.Favourites>):

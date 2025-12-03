@@ -1,4 +1,4 @@
-import {Navigation} from '../../components/Navigation.tsx';
+import {Navigation} from '../../components/navigation/Navigation.tsx';
 import {CityFavourites} from './CityFavourites.tsx';
 import {useAppSelector} from '../../hooks/useAppSelector.ts';
 import {

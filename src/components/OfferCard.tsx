@@ -11,7 +11,7 @@ interface OfferCardProps {
 }
 
 export function OfferCard({offer, cardType, onMouseEnter, onMouseLeave}: OfferCardProps) {
-  const offerLink = `${AppRoute.Offer.replace(':id', offer.id.toString())}`;
+  const offerLink = AppRoute.Offer(offer.id);
   const stylePrefix = getStylePrefix(cardType);
 
   return (

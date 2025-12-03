@@ -4,12 +4,12 @@ export const BACKEND_URL = 'https://14.design.htmlacademy.pro/six-cities';
 
 export const REQUEST_TIMEOUT = 5000;
 
-export enum AppRoute {
-  Main = '/',
-  Login = '/login',
-  Favourites = '/favourites',
-  Offer = '/offer/:id',
-}
+export const AppRoute = {
+  Main: '/',
+  Login: '/login',
+  Favourites: '/favourites',
+  Offer: (id: string) => `/offer/${id}`,
+};
 
 export const APIRoute = {
   Login: '/login',
@@ -35,6 +35,11 @@ export enum AuthorizationStatus {
   NotAuth
 }
 
+export enum OfferCardStyle {
+  City,
+  NearPlace
+}
+
 export const CITIES = Object.freeze({
   Paris: 'Paris',
   Cologne: 'Cologne',
@@ -43,11 +48,6 @@ export const CITIES = Object.freeze({
   Hamburg: 'Hamburg',
   Dusseldorf: 'Dusseldorf'
 });
-
-export enum OfferCardStyle {
-  City,
-  NearPlace
-}
 
 export const CITIES_LIST: ReadonlyArray<CityName> = Object.keys(CITIES) as ReadonlyArray<CityName>;
 

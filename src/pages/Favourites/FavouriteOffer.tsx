@@ -2,7 +2,7 @@ import {OffersListItem} from '../../types/responses/offers/offersList.ts';
 import {AppRoute} from '../../const.ts';
 
 export function FavouriteOffer({offer}: { offer: OffersListItem }) {
-  const offerLink = AppRoute.Offer.replace(':id', offer.id.toString());
+  const offerLink = AppRoute.Offer(offer.id);
 
   return (
     <article className="favorites__card place-card">
