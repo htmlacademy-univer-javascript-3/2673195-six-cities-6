@@ -1,12 +1,14 @@
-import {useCallback, useState} from 'react';
+import {useCallback} from 'react';
 import {OffersList} from '../types/responses/offers/offersList.ts';
 import {OfferCard} from './OfferCard.tsx';
 import {OfferCardStyle} from '../const.ts';
 import {OfferCompactDto} from '../types/responses/offers/offerCompactDto.ts';
+import {Location} from '../types/location.ts';
 
 interface OffersListProps {
   offers: OffersList | OfferCompactDto[];
   cardStyle: OfferCardStyle;
+  onActivePointChange: (location: Location | null) => void;
 }
 
 function getClassName(cardType: OfferCardStyle): string {
@@ -15,21 +17,24 @@ function getClassName(cardType: OfferCardStyle): string {
       return 'cities__places-list places__list tabs__content';
     case OfferCardStyle.NearPlace:
       return 'near-places__list places__list';
+    default:
+      return 'places__list';
   }
 }
 
-export function OffersListComponent({offers, cardStyle}: OffersListProps) {
+export function OffersListComponent({offers, cardStyle, onActivePointChange}: OffersListProps) {
   const className = getClassName(cardStyle);
 
-  const [, setActiveOffer] = useState<string | null>(null);
-
   const handleMouseEnter = useCallback((offerId: string) => {
-    setActiveOffer(offerId);
-  }, []);
+    const offer = offers.find((x) => x.id === offerId);
+    if (offer){
+      onActivePointChange(offer.location);
+    }
+  }, [offers, onActivePointChange]);
 
   const handleMouseLeave = useCallback(() => {
-    setActiveOffer(null);
-  }, []);
+    onActivePointChange(null);
+  }, [onActivePointChange]);
 
   return (
     <div className={className}>
