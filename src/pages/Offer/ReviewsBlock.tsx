@@ -33,6 +33,6 @@ export function ReviewsBlock({offerId} : {offerId: string}) {
       Reviews &middot; <span className="reviews__amount">{totalComments}</span>
       </h2>
       <ReviewsList reviews={comments}/>
-      <ReviewForm/>
+      <ReviewForm offerId={offerId}/>
     </section>);
 }

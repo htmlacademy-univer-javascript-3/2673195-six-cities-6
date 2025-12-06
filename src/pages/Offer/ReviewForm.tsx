@@ -1,9 +1,7 @@
-import {useState} from 'react';
-
-interface ReviewFormState {
-  rating: number | null;
-  content: string;
-}
+import React, {useState} from 'react';
+import {postCommentAction} from '../../store/apiActions/commentsActions.ts';
+import {useAppDispatch} from '../../hooks/useAppDispatch.ts';
+import {NewCommentDto} from '../../types/requests/postCommentRequest.ts';
 
 function ReviewFormRating({handleRatingChange} : { handleRatingChange: (e: React.ChangeEvent<HTMLInputElement>) => void }) {
   return (
@@ -61,11 +59,17 @@ function ReviewFormRating({handleRatingChange} : { handleRatingChange: (e: React
   );
 }
 
-export function ReviewForm() {
-  const [formData, setFormData] = useState<ReviewFormState>({
-    rating: null,
-    content: '',
+export function ReviewForm({offerId} : { offerId: string }) {
+  const [formData, setFormData] = useState<NewCommentDto>({
+    rating: 0,
+    comment: '',
   });
+
+  const dispatch = useAppDispatch();
+
+  const postComment = () => {
+    dispatch(postCommentAction({offerId: offerId, comment: formData}));
+  };
 
   const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -77,11 +81,15 @@ export function ReviewForm() {
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
-      content: e.target.value,
+      comment: e.target.value,
     });
   };
 
-  const isFormValid = formData.rating !== null && formData.content.length >= 50 && formData.content.length <= 300;
+  const isFormValid =
+    formData.rating > 0
+    && formData.rating <= 5
+    && formData.comment.length >= 50
+    && formData.comment.length <= 300;
 
   return (
     <form className="reviews__form form" action="#" method="post">
@@ -92,7 +100,7 @@ export function ReviewForm() {
         id="review"
         name="reviewText"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={formData.content}
+        value={formData.comment}
         onChange={handleTextChange}
         minLength={50}
         maxLength={300}
@@ -105,6 +113,7 @@ export function ReviewForm() {
         <button
           className="reviews__submit form__submit button"
           type="submit"
+          onClick={postComment}
           disabled={!isFormValid}
         >
           Submit

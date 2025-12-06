@@ -7,6 +7,7 @@ import {mapCommentToReview} from '../../utils/mapCommentToReview.ts';
 import {CommentList} from '../../types/responses/comments/commentList.ts';
 import {ReviewListData} from '../../types/reviews/reviewListData.ts';
 import {ReviewData} from '../../types/reviews/reviewData.ts';
+import {CommentDto} from '../../types/responses/comments/commentsDto.ts';
 
 export const fetchCommentsAction = createAsyncThunk<ReviewListData, string, {
   dispatch: AppDispatch;
@@ -27,7 +28,7 @@ export const postCommentAction = createAsyncThunk<ReviewData, PostCommentRequest
 }>(
   'data/postComment',
   async ({ offerId, comment } : PostCommentRequest, {extra: api}) => {
-    const {data} = await api.post<ReviewData>(APIRoute.Offer(offerId), comment);
-    return data;
+    const {data} = await api.post<CommentDto>(APIRoute.Comments(offerId), comment);
+    return mapCommentToReview(data);
   },
 );

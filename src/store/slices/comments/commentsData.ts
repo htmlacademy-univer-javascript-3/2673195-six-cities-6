@@ -32,14 +32,13 @@ export const commentsData = createSlice({
       })
       .addCase(postCommentAction.pending, (state) => {
         state.isCommentsLoading = true;
-        state.hasError = false;
       })
       .addCase(postCommentAction.fulfilled, (state, action) => {
+        state.isCommentsLoading = false;
         state.comments.push(action.payload);
       })
       .addCase(postCommentAction.rejected, (state) => {
         state.isCommentsLoading = false;
-        state.hasError = false;
       });
   }
 });

@@ -16,7 +16,7 @@ export function Review({review}: { review: ReviewData }) {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: '80%'}}></span>
+            <span style={{width: `${20 * review.rating }%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
