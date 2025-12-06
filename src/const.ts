@@ -4,12 +4,12 @@ export const BACKEND_URL = 'https://14.design.htmlacademy.pro/six-cities';
 
 export const REQUEST_TIMEOUT = 5000;
 
-export enum AppRoute {
-  Main = '/',
-  Login = '/login',
-  Favourites = '/favourites',
-  Offer = '/offer/:id',
-}
+export const AppRoute = {
+  Main: '/',
+  Login: '/login',
+  Favourites: '/favourites',
+  Offer: (id: string) => `/offer/${id}`,
+};
 
 export const APIRoute = {
   Login: '/login',
@@ -35,6 +35,25 @@ export enum AuthorizationStatus {
   NotAuth
 }
 
+export enum OfferCardStyle {
+  City,
+  NearPlace
+}
+
+export enum SortType {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
+}
+
+export const SORT_OPTIONS = [
+  SortType.Popular,
+  SortType.PriceLowToHigh,
+  SortType.PriceHighToLow,
+  SortType.TopRatedFirst,
+] as const;
+
 export const CITIES = Object.freeze({
   Paris: 'Paris',
   Cologne: 'Cologne',
@@ -44,15 +63,8 @@ export const CITIES = Object.freeze({
   Dusseldorf: 'Dusseldorf'
 });
 
-export enum OfferCardStyle {
-  City,
-  NearPlace
-}
-
 export const CITIES_LIST: ReadonlyArray<CityName> = Object.keys(CITIES) as ReadonlyArray<CityName>;
 
-export const URL_MARKER_DEFAULT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+export const URL_MARKER_DEFAULT = '/img/pin.svg';
 
-export const URL_MARKER_CURRENT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+export const URL_MARKER_SELECTED = '/img/pin-active.svg';

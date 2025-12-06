@@ -6,7 +6,7 @@ import {FavouritesState} from '../../../types/stateSlices/favouritesState.ts';
 
 const initialState: FavouritesState = {
   favourites: [],
-  hasError: false,
+  hasError: true,
   isFavouritesDataLoading: false,
 };
 

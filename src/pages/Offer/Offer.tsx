@@ -1,5 +1,5 @@
 import {useParams} from 'react-router-dom';
-import {Navigation} from '../../components/Navigation.tsx';
+import {Navigation} from '../../components/navigation/Navigation.tsx';
 import {Map} from '../../components/Map.tsx';
 import {ReviewForm} from './ReviewForm.tsx';
 import {OfferImages} from './OfferImage.tsx';
