@@ -4,6 +4,7 @@ import {AxiosInstance} from 'axios';
 import {APIRoute} from '../../const.ts';
 import {CommentsListDto} from '../../types/responses/comments/commentsListDto.ts';
 import {CommentDto} from '../../types/responses/comments/commentDto.ts';
+import {PostCommentRequest} from '../../types/requests/postCommentRequest.ts';
 
 export const fetchCommentsAction = createAsyncThunk<CommentsListDto, string, {
   dispatch: AppDispatch;
@@ -17,14 +18,14 @@ export const fetchCommentsAction = createAsyncThunk<CommentsListDto, string, {
   },
 );
 
-export const postCommentAction = createAsyncThunk<CommentDto, string, {
+export const postCommentAction = createAsyncThunk<CommentDto, PostCommentRequest, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/postComment',
-  async (id, {extra: api}) => {
-    const {data} = await api.post<CommentDto>(APIRoute.Offer(id));
+  async ({ offerId, comment } : PostCommentRequest, {extra: api}) => {
+    const {data} = await api.post<CommentDto>(APIRoute.Offer(offerId), comment);
     return data;
   },
 );

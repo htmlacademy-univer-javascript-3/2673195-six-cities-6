@@ -25,6 +25,7 @@ export const APIRoute = {
 export enum NameSpace {
   Offers = 'OFFERS',
   User = 'USER',
+  Comments = 'COMMENTS',
   Favourites = 'Favourites',
   City = 'CITY',
 }
