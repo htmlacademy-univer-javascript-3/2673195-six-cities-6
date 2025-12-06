@@ -1,6 +1,6 @@
-import {CommentDto} from '../../types/responses/comments/commentDto.ts';
+import {ReviewData} from '../../types/reviews/reviewData.ts';
 
-export function Review({review}: { review: CommentDto }) {
+export function Review({review}: { review: ReviewData }) {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">

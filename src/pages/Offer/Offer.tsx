@@ -1,20 +1,18 @@
 import {useParams} from 'react-router-dom';
 import {Navigation} from '../../components/navigation/Navigation.tsx';
 import {Map} from '../../components/Map.tsx';
-import {ReviewForm} from './ReviewForm.tsx';
 import {OfferImages} from './OfferImage.tsx';
 import {OfferInside} from './OfferInside.tsx';
 import {HostInfo} from './HostInfo.tsx';
 import {OfferDescription} from './OfferDescription.tsx';
 import {NearPlaces} from './NearPlaces.tsx';
-import {ReviewsList} from './ReviewsList.tsx';
 import {fetchOfferAction} from '../../store/apiActions/offersActions.ts';
 import {useAppDispatch} from '../../hooks/useAppDispatch.ts';
 import {useEffect, useState} from 'react';
 import {OfferDto} from '../../types/responses/offers/offerDto.ts';
 import {AxiosError} from 'axios';
-import {CommentsListDto} from '../../types/responses/comments/commentsListDto.ts';
 import {OffersNearbyDto} from '../../types/responses/offers/offersNearbyDto.ts';
+import {ReviewsBlock} from './ReviewsBlock.tsx';
 
 export function Offer() {
   const {id} = useParams();
@@ -42,8 +40,6 @@ export function Offer() {
         });
     }
   }, [dispatch, id]);
-
-  const offerReviews: CommentsListDto = [];
 
   if (loading) {
     return <div>Loading...</div>;
@@ -108,17 +104,16 @@ export function Offer() {
                 <HostInfo host={host}/>
                 <OfferDescription description={offer.description}/>
               </div>
-              <section className="offer__reviews reviews">
-                <h2 className="reviews__title">
-                  Reviews &middot; <span className="reviews__amount">{offerReviews.length}</span>
-                </h2>
-                <ReviewsList reviews={offerReviews}/>
-                <ReviewForm/>
-              </section>
+              <ReviewsBlock offerId={offer.id}/>
             </div>
           </div>
           <div className="offer__map map">
-            <Map city={offer.city} points={nearPlaces.map((x) => x.location)} className={'offer__map map'}/>
+            <Map
+              city={offer.city}
+              points={nearPlaces.map((x) => x.location)}
+              className={'offer__map map'}
+              selectedPoint={null}
+            />
           </div>
         </section>
         <NearPlaces offers={nearPlaces}/>

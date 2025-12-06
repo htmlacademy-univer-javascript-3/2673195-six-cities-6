@@ -7,7 +7,7 @@ export function NearPlaces({offers}: { offers: OffersNearbyDto }) {
     <div className="container">
       <section className="near-places places">
         <h2 className="near-places__title">Other places in the neighbourhood</h2>
-        <OffersListComponent offers={offers.slice(0, 3)} cardStyle={OfferCardStyle.NearPlace}/>
+        <OffersListComponent offers={offers.slice(0, 3)} cardStyle={OfferCardStyle.NearPlace} onActivePointChange={() => {}}/>
       </section>
     </div>
   );

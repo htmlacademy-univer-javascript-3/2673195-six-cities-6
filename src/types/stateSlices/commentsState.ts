@@ -1,7 +1,7 @@
-import {CommentsListDto} from '../responses/comments/commentsListDto.ts';
+import {ReviewListData} from '../reviews/reviewListData.ts';
 
 export type CommentsState = {
-  comments: CommentsListDto;
+  comments: ReviewListData;
   totalComments: number;
   isCommentsLoading: boolean;
   hasError: boolean;
