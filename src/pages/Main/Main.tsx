@@ -11,6 +11,7 @@ import {getCityName} from '../../store/slices/city/citySelectors.ts';
 import {Navigate} from 'react-router-dom';
 import {Spinner} from '../../components/Spinner.tsx';
 import CitiesPlaces from './CitiesPlaces.tsx';
+import {SortProvider} from '../../components/SortContext.tsx';
 
 export function Main() {
   const isLoading = useAppSelector(getOffersLoadingStatus);
@@ -35,7 +36,9 @@ export function Main() {
           }
           {
             !isLoading && !hasError && offers.length > 0 &&
-            <CitiesPlaces city={city} offers={offers}/>
+            <SortProvider>
+              <CitiesPlaces city={city} offers={offers}/>
+            </SortProvider>
           }
         </div>
       </main>

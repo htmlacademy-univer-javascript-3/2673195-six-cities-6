@@ -12,7 +12,7 @@ interface OfferCardProps {
   onMouseLeave: () => void;
 }
 
-export const OfferCard = memo(({offer, cardType, onMouseEnter, onMouseLeave}: OfferCardProps) => {
+export function OfferCard({offer, cardType, onMouseEnter, onMouseLeave}: OfferCardProps) {
   const offerLink = AppRoute.Offer(offer.id);
   const stylePrefix = getStylePrefix(cardType);
 
@@ -58,4 +58,6 @@ export const OfferCard = memo(({offer, cardType, onMouseEnter, onMouseLeave}: Of
       </div>
     </article>
   );
-});
+}
+
+export const OfferCardMemo = memo(OfferCard);

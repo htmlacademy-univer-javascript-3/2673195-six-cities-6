@@ -40,6 +40,20 @@ export enum OfferCardStyle {
   NearPlace
 }
 
+export enum SortType {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
+}
+
+export const SORT_OPTIONS = [
+  SortType.Popular,
+  SortType.PriceLowToHigh,
+  SortType.PriceHighToLow,
+  SortType.TopRatedFirst,
+] as const;
+
 export const CITIES = Object.freeze({
   Paris: 'Paris',
   Cologne: 'Cologne',
