@@ -1,11 +1,7 @@
-import {Map} from '../../components/Map.tsx';
 import {Navigation} from '../../components/navigation/Navigation.tsx';
 import {Tabs} from './Tabs.tsx';
-import {OffersListComponent} from '../../components/OffersListComponent.tsx';
 import {useAppSelector} from '../../hooks/useAppSelector.ts';
-import {Header} from './Header.tsx';
 import {CityName} from '../../types/cityName.ts';
-import {OfferCardStyle} from '../../const.ts';
 import {
   getOffersErrorStatus,
   getOffersInCity,
@@ -14,14 +10,15 @@ import {
 import {getCityName} from '../../store/slices/city/citySelectors.ts';
 import {Navigate} from 'react-router-dom';
 import {Spinner} from '../../components/Spinner.tsx';
+import CitiesPlaces from './CitiesPlaces.tsx';
+import {SortProvider} from '../../components/SortContext.tsx';
 
 export function Main() {
   const isLoading = useAppSelector(getOffersLoadingStatus);
   const hasError = useAppSelector(getOffersErrorStatus);
+
   const city: CityName = useAppSelector(getCityName);
   const offers = useAppSelector(getOffersInCity);
-
-  const points = offers.map((offer) => offer.location);
 
   return (
     <div className="page page--gray page--main">
@@ -39,18 +36,9 @@ export function Main() {
           }
           {
             !isLoading && !hasError && offers.length > 0 &&
-            <div className="cities__places-container container">
-              <section className="cities__places places">
-                <Header
-                  activeCity={city}
-                  offersInCityCount={offers.length}
-                />
-                <OffersListComponent offers={offers} cardStyle={OfferCardStyle.City}/>
-              </section>
-              <div className="cities__right-section">
-                <Map city={offers[0].city} points={points} className={'cities__map map'}/>
-              </div>
-            </div>
+            <SortProvider>
+              <CitiesPlaces city={city} offers={offers}/>
+            </SortProvider>
           }
         </div>
       </main>

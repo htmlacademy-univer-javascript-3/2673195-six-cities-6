@@ -1,27 +1,37 @@
-import {useRef, useEffect} from 'react';
+import {useRef, useEffect, useCallback} from 'react';
 import {Icon, Marker, layerGroup} from 'leaflet';
 import {useMap} from '../hooks/useMap.ts';
 import 'leaflet/dist/leaflet.css';
 import { CityDto } from '../types/responses/cityDto.ts';
 import {Location} from '../types/location.ts';
-import {URL_MARKER_DEFAULT} from '../const.ts';
+import {URL_MARKER_SELECTED, URL_MARKER_DEFAULT} from '../const.ts';
 
 type MapProps = {
   city: CityDto;
   points: Location[];
   className: string;
-  // selectedPoint: Point | undefined;
+  selectedPoint: Location | null;
 };
 
-const defaultCustomIcon = new Icon({
+const defaultMarkerIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
   iconSize: [40, 40],
   iconAnchor: [20, 40]
 });
 
-export function Map({city, points, className}: MapProps) {
+const selectedMarkerIcon = new Icon({
+  iconUrl: URL_MARKER_SELECTED,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40]
+});
+
+export function Map({city, points, className, selectedPoint}: MapProps) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+
+  const checkIsSelected = useCallback((point: Location) =>
+    selectedPoint && point.latitude === selectedPoint.latitude && point.longitude === selectedPoint.longitude,
+  [selectedPoint]);
 
   useEffect(() => {
     if (map) {
@@ -32,8 +42,10 @@ export function Map({city, points, className}: MapProps) {
           lng: point.longitude
         });
 
+        const markerIcon = checkIsSelected(point) ? selectedMarkerIcon : defaultMarkerIcon;
+
         marker
-          .setIcon(defaultCustomIcon)
+          .setIcon(markerIcon)
           .addTo(markerLayer);
       });
 
@@ -41,7 +53,7 @@ export function Map({city, points, className}: MapProps) {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, points, city]);
+  }, [map, points, city, checkIsSelected]);
 
   return <div className={className} ref={mapRef}></div>;
 }
