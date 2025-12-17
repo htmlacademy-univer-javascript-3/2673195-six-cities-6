@@ -118,7 +118,12 @@ export function Offer() {
             </div>
           </div>
           <div className="offer__map map">
-            <Map city={offer.city} points={nearPlaces.map((x) => x.location)} className={'offer__map map'}/>
+            <Map
+              city={offer.city}
+              points={nearPlaces.map((x) => x.location)}
+              className={'offer__map map'}
+              selectedPoint={null}
+            />
           </div>
         </section>
         <NearPlaces offers={nearPlaces}/>

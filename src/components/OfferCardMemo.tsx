@@ -60,4 +60,4 @@ function OfferCardNotMemorized({offer, cardType, onMouseEnter, onMouseLeave}: Of
   );
 }
 
-export const OfferCard = memo(OfferCardNotMemorized);
+export const OfferCardMemo = memo(OfferCardNotMemorized);

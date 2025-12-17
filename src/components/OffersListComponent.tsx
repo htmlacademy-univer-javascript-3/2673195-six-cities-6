@@ -1,6 +1,6 @@
 import {useCallback} from 'react';
 import {OffersList} from '../types/responses/offers/offersList.ts';
-import {OfferCard} from './OfferCard.tsx';
+import {OfferCardMemo} from './OfferCardMemo.tsx';
 import {OfferCardStyle} from '../const.ts';
 import {OfferCompactDto} from '../types/responses/offers/offerCompactDto.ts';
 import {Location} from '../types/location.ts';
@@ -39,7 +39,7 @@ export function OffersListComponent({offers, cardStyle, onActivePointChange}: Of
   return (
     <div className={className}>
       {offers.map((offer) => (
-        <OfferCard
+        <OfferCardMemo
           key={offer.id}
           cardType={cardStyle}
           offer={offer}
