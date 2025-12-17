@@ -2,8 +2,8 @@ import {OffersListItem} from '../types/responses/offers/offersList.ts';
 import {AppRoute, OfferCardStyle} from '../const.ts';
 import {getStylePrefix} from '../utils/offerCardUtils.ts';
 import {OfferCompactDto} from '../types/responses/offers/offerCompactDto.ts';
-import {Link} from 'react-router-dom';
 import {memo} from 'react';
+import {Link} from 'react-router-dom';
 
 interface OfferCardProps {
   offer: OffersListItem | OfferCompactDto;
@@ -12,7 +12,7 @@ interface OfferCardProps {
   onMouseLeave: () => void;
 }
 
-export function OfferCard({offer, cardType, onMouseEnter, onMouseLeave}: OfferCardProps) {
+function OfferCardNotMemorized({offer, cardType, onMouseEnter, onMouseLeave}: OfferCardProps) {
   const offerLink = AppRoute.Offer(offer.id);
   const stylePrefix = getStylePrefix(cardType);
 
@@ -60,4 +60,4 @@ export function OfferCard({offer, cardType, onMouseEnter, onMouseLeave}: OfferCa
   );
 }
 
-export const OfferCardMemo = memo(OfferCard);
+export const OfferCardMemo = memo(OfferCardNotMemorized);
