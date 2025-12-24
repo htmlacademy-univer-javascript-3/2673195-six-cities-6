@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { Review } from './Review';
-import { CommentDto } from '../../types/responses/comments/commentDto';
+import {ReviewData} from '../../types/reviews/reviewData.ts';
 
 describe('Review Component', () => {
-  const mockReview: CommentDto = {
+  const mockReview: ReviewData = {
     id: 1,
     comment: 'Apartment',
     rating: 4,
