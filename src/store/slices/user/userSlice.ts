@@ -40,6 +40,7 @@ export const userData = createSlice({
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NotAuth;
+        state.user = null;
       });
   }
 });
