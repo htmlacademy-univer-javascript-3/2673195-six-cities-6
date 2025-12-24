@@ -1,55 +1,62 @@
-import {useParams} from 'react-router-dom';
+import {Navigate, useParams} from 'react-router-dom';
 import {Navigation} from '../../components/navigation/Navigation.tsx';
-import {Map} from '../../components/Map.tsx';
 import {OfferImages} from './OfferImage.tsx';
 import {OfferInside} from './OfferInside.tsx';
 import {HostInfo} from './HostInfo.tsx';
 import {OfferDescription} from './OfferDescription.tsx';
 import {NearPlaces} from './NearPlaces.tsx';
-import {fetchOfferAction} from '../../store/apiActions/offersActions.ts';
+import {fetchNearbyAction, fetchOfferAction} from '../../store/apiActions/offersActions.ts';
 import {useAppDispatch} from '../../hooks/useAppDispatch.ts';
-import {useEffect, useState} from 'react';
-import {OfferDto} from '../../types/responses/offers/offerDto.ts';
-import {AxiosError} from 'axios';
-import {OffersNearbyDto} from '../../types/responses/offers/offersNearbyDto.ts';
+import {useEffect} from 'react';
 import {ReviewsBlock} from './ReviewsBlock.tsx';
+import {useAppSelector} from '../../hooks/useAppSelector.ts';
+import {getAuthorizationStatus} from '../../store/slices/user/userSelectors.ts';
+import {AppRoute, AuthorizationStatus} from '../../const.ts';
+import {
+  getOffer,
+  getOfferErrorStatus,
+  getOfferLoadingStatus
+} from '../../store/slices/offer/offerSelectors.ts';
+import {Spinner} from '../../components/Spinner.tsx';
+import {NearPlacesMap} from './NearPlacesMap.tsx';
+import {clearOffer} from '../../store/slices/offer/offerSlice.ts';
+
 
 export function Offer() {
   const {id} = useParams();
+  const authStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
 
-  const [offer, setOffer] = useState<OfferDto | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const offer = useAppSelector(getOffer);
+  const loading = useAppSelector(getOfferLoadingStatus);
+  const error = useAppSelector(getOfferErrorStatus);
 
   useEffect(() => {
     if (id) {
-      setLoading(true);
-      dispatch(fetchOfferAction(id))
-        .unwrap()
-        .then((offerData) => {
-          setOffer(offerData);
-          setError(null);
-        })
-        .catch((err: AxiosError) => {
-          setError(err.message || 'Failed to load offer');
-          setOffer(null);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      dispatch(fetchOfferAction(id)).then((result) => {
+        if (fetchOfferAction.fulfilled.match(result)) {
+          dispatch(fetchNearbyAction(id));
+        }
+      });
     }
+
+    return () => {
+      dispatch(clearOffer());
+    };
   }, [dispatch, id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Spinner/>;
   }
 
-  if (error || !offer) {
-    return <div>Error: {error}</div>;
+  if (error) {
+    return <Navigate to={AppRoute.NotFound}/>;
   }
 
-  const nearPlaces : OffersNearbyDto = [];
+  if (!offer) {
+    return null;
+  }
+
   const host = offer.host;
 
   return (
@@ -104,19 +111,12 @@ export function Offer() {
                 <HostInfo host={host}/>
                 <OfferDescription description={offer.description}/>
               </div>
-              <ReviewsBlock offerId={offer.id}/>
+              {authStatus === AuthorizationStatus.Auth && <ReviewsBlock offerId={offer.id}/>}
             </div>
           </div>
-          <div className="offer__map map">
-            <Map
-              city={offer.city}
-              points={nearPlaces.map((x) => x.location)}
-              className={'offer__map map'}
-              selectedPoint={null}
-            />
-          </div>
+          <NearPlacesMap/>
         </section>
-        <NearPlaces offers={nearPlaces}/>
+        <NearPlaces/>
       </main>
     </div>
   );

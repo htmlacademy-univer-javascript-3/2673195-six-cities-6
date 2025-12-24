@@ -1,8 +1,10 @@
 import {OfferCardStyle} from '../../const.ts';
-import {OffersNearbyDto} from '../../types/responses/offers/offersNearbyDto.ts';
 import {OffersListComponent} from '../../components/OffersListComponent.tsx';
+import {useAppSelector} from '../../hooks/useAppSelector.ts';
+import {getNearbyOffers} from '../../store/slices/offer/offerSelectors.ts';
 
-export function NearPlaces({offers}: { offers: OffersNearbyDto }) {
+export function NearPlaces() {
+  const offers = useAppSelector(getNearbyOffers);
   return (
     <div className="container">
       <section className="near-places places">
