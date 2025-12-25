@@ -7,7 +7,6 @@ import {DetailMessageType} from '../types/errorMessageType.ts';
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
-  [StatusCodes.NOT_FOUND]: true
 };
 
 const shouldDisplayError = (response: AxiosResponse) =>

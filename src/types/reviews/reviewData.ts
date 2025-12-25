@@ -1,6 +1,6 @@
-import {UserCompactDto} from '../userCompactDto.ts';
+import {UserCompactDto} from '../responses/userCompactDto.ts';
 
-export type CommentDto = {
+export type ReviewData = {
   id: number;
   date: Date;
   user: UserCompactDto;

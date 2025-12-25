@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { vi, describe, it, expect } from 'vitest';
 import { ReviewsList } from './ReviewsList';
-import { CommentDto } from '../../types/responses/comments/commentDto';
+import {ReviewListData} from '../../types/reviews/reviewListData.ts';
 
 vi.mock('./Review.tsx', () => ({
   Review: vi.fn(() => <li data-testid="review-item">Review</li>)
 }));
 
 describe('ReviewsList Component', () => {
-  const mockReviews: CommentDto[] = [
+  const mockReviews: ReviewListData = [
     {
       id: 1,
       comment: 'Great place!',

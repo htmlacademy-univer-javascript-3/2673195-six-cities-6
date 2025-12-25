@@ -2,29 +2,33 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../../types/state.ts';
 import {AxiosInstance} from 'axios';
 import {APIRoute} from '../../const.ts';
-import {CommentsListDto} from '../../types/responses/comments/commentsListDto.ts';
-import {CommentDto} from '../../types/responses/comments/commentDto.ts';
+import {PostCommentRequest} from '../../types/requests/postCommentRequest.ts';
+import {mapCommentToReview} from '../../utils/mapCommentToReview.ts';
+import {CommentList} from '../../types/responses/comments/commentList.ts';
+import {ReviewListData} from '../../types/reviews/reviewListData.ts';
+import {ReviewData} from '../../types/reviews/reviewData.ts';
+import {CommentDto} from '../../types/responses/comments/commentsDto.ts';
 
-export const fetchCommentsAction = createAsyncThunk<CommentsListDto, string, {
+export const fetchCommentsAction = createAsyncThunk<ReviewListData, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchComments',
   async (offerId, {extra: api}) => {
-    const {data} = await api.get<CommentsListDto>(APIRoute.Comments(offerId));
-    return data;
+    const {data} = await api.get<CommentList>(APIRoute.Comments(offerId));
+    return data.map((comment) => mapCommentToReview(comment));
   },
 );
 
-export const postCommentAction = createAsyncThunk<CommentDto, string, {
+export const postCommentAction = createAsyncThunk<ReviewData, PostCommentRequest, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/postComment',
-  async (id, {extra: api}) => {
-    const {data} = await api.post<CommentDto>(APIRoute.Offer(id));
-    return data;
+  async ({ offerId, comment } : PostCommentRequest, {extra: api}) => {
+    const {data} = await api.post<CommentDto>(APIRoute.Comments(offerId), comment);
+    return mapCommentToReview(data);
   },
 );

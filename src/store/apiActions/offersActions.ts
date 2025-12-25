@@ -18,18 +18,6 @@ export const fetchOffersAction = createAsyncThunk<OffersList, undefined, {
   },
 );
 
-export const fetchOfferAction = createAsyncThunk<OfferDto, string, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'data/fetchOffer',
-  async (id, {extra: api}) => {
-    const {data} = await api.get<OfferDto>(APIRoute.Offer(id));
-    return data;
-  },
-);
-
 export const fetchNearbyAction = createAsyncThunk<OffersNearbyDto, string, {
   dispatch: AppDispatch;
   state: State;
@@ -38,6 +26,18 @@ export const fetchNearbyAction = createAsyncThunk<OffersNearbyDto, string, {
   'data/fetchOffersNearby',
   async (id, {extra: api}) => {
     const {data} = await api.get<OffersNearbyDto>(APIRoute.OffersNearby(id));
+    return data;
+  },
+);
+
+export const fetchOfferAction = createAsyncThunk<OfferDto, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffer',
+  async (id, {extra: api}) => {
+    const {data} = await api.get<OfferDto>(APIRoute.Offer(id));
     return data;
   },
 );

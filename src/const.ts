@@ -9,6 +9,7 @@ export const AppRoute = {
   Login: '/login',
   Favourites: '/favourites',
   Offer: (id: string) => `/offer/${id}`,
+  NotFound: '/*'
 };
 
 export const APIRoute = {
@@ -23,8 +24,10 @@ export const APIRoute = {
 };
 
 export enum NameSpace {
+  Offer = 'OFFER',
   Offers = 'OFFERS',
   User = 'USER',
+  Comments = 'COMMENTS',
   Favourites = 'Favourites',
   City = 'CITY',
 }

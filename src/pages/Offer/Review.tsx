@@ -1,6 +1,6 @@
-import {CommentDto} from '../../types/responses/comments/commentDto.ts';
+import {ReviewData} from '../../types/reviews/reviewData.ts';
 
-export function Review({review}: { review: CommentDto }) {
+export function Review({review}: { review: ReviewData }) {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -16,7 +16,7 @@ export function Review({review}: { review: CommentDto }) {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: '80%'}}></span>
+            <span style={{width: `${20 * review.rating }%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
