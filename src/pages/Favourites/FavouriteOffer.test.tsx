@@ -23,7 +23,7 @@ describe('FavouriteOffer Component', () => {
       longitude: 2.350499,
       zoom: 16
     },
-    isFavourite: true,
+    isFavorite: true,
     isPremium: true,
     rating: 4.8,
     previewImage: 'img/apartment-01.jpg'
