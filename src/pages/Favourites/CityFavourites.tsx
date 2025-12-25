@@ -7,6 +7,10 @@ export function CityFavourites({cityName}: { cityName: CityName }) {
   const favourites = useAppSelector((state) =>
     getFavouritesInCity(state, cityName));
 
+  if (favourites.length === 0) {
+    return null;
+  }
+
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">

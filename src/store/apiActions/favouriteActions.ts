@@ -17,14 +17,14 @@ export const fetchFavouriteAction = createAsyncThunk<OffersList, undefined, {
   },
 );
 
-export const changeOfferFavouriteStatus = createAsyncThunk<OfferDto, {offerId: string; status: number}, {
+export const changeOfferFavouriteStatus = createAsyncThunk<OfferDto, {offerId: string; newIsFavorite: boolean}, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/postComment',
-  async ({offerId, status}, {extra: api}) => {
-    const {data} = await api.post<OfferDto>(APIRoute.ChangeFavouriteStatus(offerId, status));
+  'data/changeFavouriteStatus',
+  async ({offerId, newIsFavorite}, {extra: api}) => {
+    const {data} = await api.post<OfferDto>(APIRoute.ChangeFavouriteStatus(offerId, newIsFavorite ? 1 : 0));
     return data;
   },
 );

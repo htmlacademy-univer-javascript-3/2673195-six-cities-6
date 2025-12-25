@@ -7,7 +7,7 @@ const initialState: CommentsState = {
   comments: [],
   totalComments: 0,
   isCommentsLoading: false,
-  hasError: true,
+  hasError: false,
 };
 
 export const commentsData = createSlice({
