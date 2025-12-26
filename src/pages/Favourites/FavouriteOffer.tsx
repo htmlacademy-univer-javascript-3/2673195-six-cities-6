@@ -1,5 +1,6 @@
 import {OffersListItem} from '../../types/responses/offers/offersList.ts';
-import {AppRoute} from '../../const.ts';
+import {AppRoute, BookmarkButtonType} from '../../const.ts';
+import {BookmarkButton} from '../../components/BookmarkButton.tsx';
 
 export function FavouriteOffer({offer}: { offer: OffersListItem }) {
   const offerLink = AppRoute.Offer(offer.id);
@@ -17,12 +18,7 @@ export function FavouriteOffer({offer}: { offer: OffersListItem }) {
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+          <BookmarkButton offerId={offer.id} isFavorite={offer.isFavorite} styleType={BookmarkButtonType.PlaceCard}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

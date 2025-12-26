@@ -30,7 +30,7 @@ describe('Favourites Slice', () => {
         longitude: 2.350499,
         zoom: 16
       }),
-      isFavourite: true,
+      isFavorite: true,
       isPremium: true,
       rating: 4.8,
       previewImage: 'img/apartment-01.jpg'
@@ -46,7 +46,7 @@ describe('Favourites Slice', () => {
         longitude: 6.976974,
         zoom: 16
       }),
-      isFavourite: true,
+      isFavorite: true,
       isPremium: false,
       rating: 4.3,
       previewImage: 'img/room.jpg'

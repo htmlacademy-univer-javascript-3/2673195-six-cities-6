@@ -3,7 +3,7 @@ import {BACKEND_URL, REQUEST_TIMEOUT} from '../const.ts';
 import {getToken} from './token.ts';
 import {StatusCodes} from 'http-status-codes';
 import {toast} from 'react-toastify';
-import {DetailMessageType} from '../types/errorMessageType.ts';
+import {DetailMessageType} from '../types/detailMessageType.ts';
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,

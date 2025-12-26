@@ -11,15 +11,12 @@ import {useEffect} from 'react';
 import {ReviewsBlock} from './ReviewsBlock.tsx';
 import {useAppSelector} from '../../hooks/useAppSelector.ts';
 import {getAuthorizationStatus} from '../../store/slices/user/userSelectors.ts';
-import {AppRoute, AuthorizationStatus} from '../../const.ts';
-import {
-  getOffer,
-  getOfferErrorStatus,
-  getOfferLoadingStatus
-} from '../../store/slices/offer/offerSelectors.ts';
+import {AppRoute, AuthorizationStatus, BookmarkButtonType} from '../../const.ts';
+import {getOffer, getOfferErrorStatus, getOfferLoadingStatus} from '../../store/slices/offer/offerSelectors.ts';
 import {Spinner} from '../../components/Spinner.tsx';
 import {NearPlacesMap} from './NearPlacesMap.tsx';
 import {clearOffer} from '../../store/slices/offer/offerSlice.ts';
+import {BookmarkButton} from '../../components/BookmarkButton.tsx';
 
 
 export function Offer() {
@@ -30,6 +27,7 @@ export function Offer() {
   const offer = useAppSelector(getOffer);
   const loading = useAppSelector(getOfferLoadingStatus);
   const error = useAppSelector(getOfferErrorStatus);
+
 
   useEffect(() => {
     if (id) {
@@ -74,12 +72,7 @@ export function Offer() {
                 <h1 className="offer__name">
                   {offer.title}
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <BookmarkButton offerId={offer.id} isFavorite={offer.isFavorite} styleType={BookmarkButtonType.Offer}/>
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">

@@ -18,10 +18,8 @@ export function ReviewsBlock({offerId} : {offerId: string}) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!commentsIsLoading && commentsHasError){
-      dispatch(fetchCommentsAction(offerId));
-    }
-  }, [dispatch, commentsHasError, commentsIsLoading, offerId]);
+    dispatch(fetchCommentsAction(offerId));
+  }, [dispatch, offerId]);
 
   if (commentsIsLoading) {
     return <Spinner />;
@@ -29,10 +27,8 @@ export function ReviewsBlock({offerId} : {offerId: string}) {
 
   return (
     <section className="offer__reviews reviews">
-      <h2 className="reviews__title">
-      Reviews &middot; <span className="reviews__amount">{totalComments}</span>
-      </h2>
-      <ReviewsList reviews={comments}/>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{totalComments}</span></h2>
+      {commentsHasError && <ReviewsList reviews={comments}/>}
       <ReviewForm offerId={offerId}/>
     </section>);
 }

@@ -10,7 +10,7 @@ export type OffersListItem = {
   price: number;
   city: CityDto;
   location: Location;
-  isFavourite: boolean;
+  isFavorite: boolean;
   isPremium: boolean;
   rating: number;
   previewImage: string;

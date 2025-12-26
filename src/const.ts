@@ -43,6 +43,12 @@ export enum OfferCardStyle {
   NearPlace
 }
 
+export enum BookmarkButtonType {
+  PlaceCard = 'PlaceCard',
+  Offer = 'Offer',
+  NearPlace = 'NearPlace',
+}
+
 export enum SortType {
   Popular = 'Popular',
   PriceLowToHigh = 'Price: low to high',
